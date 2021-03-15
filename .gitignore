@@ -23,7 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # added by pam
-/data
 /src/scramble
 /zip
 activate_python3.source
