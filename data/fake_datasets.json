@@ -1,0 +1,68 @@
+{
+	"response" : {
+		"numTotalResults" : 2,
+		"resultType" : "datasets",
+		"result" : [
+			{
+				"alias" : "EGAS00001001573-sc-20160629",
+				"egaStableId" : "EGAD00001002232",
+				"centerName" : "SC",
+				"creationTime" : "2016-06-30T13:17.000Z",
+				"published" : true,
+				"released" : "RELEASED",
+				"releasedDate" : "2016-07-11T00:00.000Z",
+				"title" : "The genetic evolution of precursor lesions in pancreatic cancer",
+				"description" : "Mapping genetic evolution of pancreatic cancer precursor lesions such as IPMNs and PanINs.",
+				"technology" : [ "Illumina HiSeq 2000" ],
+				"numSamples" : 20,
+				"datasetTypes" : [ "sample" ],
+				"datasetLinks" : [ ],
+				"attributes" : [ ],
+				"policyStableId" : "EGAP00001000001",
+				"files" : null,
+				"availableInBeacon" : false,
+				"accessType" : "CONTROLLED"
+			},
+			{
+				"alias" : "PanCurX_SC_WGS",
+				"egaStableId" : "EGAD00001006152",
+				"centerName" : "OICR",
+				"creationTime" : "2020-05-16T05:36.000Z",
+				"published" : true,
+				"released" : "RELEASED",
+				"releasedDate" : "2001-01-01T00:00.000Z",
+				"title" : "WGS from PDAC samples",
+				"description" : "Bam files from WGS of PDAC samples described in: Transcription phenotypes of pancreatic cancer are driven by genomic events events during tumour evolution",
+				"technology" : [ ],
+				"numSamples" : 644,
+				"datasetTypes" : [ "Whole genome sequencing" ],
+				"datasetLinks" : [ ],
+				"attributes" : [ ],
+				"policyStableId" : "EGAP00001000695",
+				"files" : null,
+				"availableInBeacon" : false,
+				"accessType" : "CONTROLLED"
+			},
+			{
+				"alias" : "PanCurX-GATA6",
+				"egaStableId" : "EGAD00001006081",
+				"centerName" : "OICR",
+				"creationTime" : "2020-04-27T17:17.000Z",
+				"published" : true,
+				"released" : "RELEASED",
+				"releasedDate" : "2001-01-01T00:00.000Z",
+				"title" : "GATA6 expression distinguishes classical and basal-like subtypes in advanced pancreatic cancer.",
+				"description" : "PURPOSE: To determine the impact of basal-like and classical subtypes in advanced PDAC and to explore GATA6 expression as a surrogate biomarker. EXPERIMENTAL DESIGN: Within the COMPASS trial patients proceeding to chemotherapy for advanced PDAC undergo tumour biopsy for RNA sequencing. Overall response rate (ORR) and overall survival (OS) were stratified by subtypes and according to chemotherapy received. Correlation of GATA6 with the subtypes using gene expression profiling, in situ hybridization (ISH) were explored. RESULTS: Between December 2015-May 2019, 195 patients (95%) had enough tissue for RNA sequencing; 39 (20%) were classified as basal-like and 156 (80%) as classical. RECIST response data were available for 157 patients; 29 basal-like and 128 classical where the ORR was 10% vs. 33% respectively (p=0.02). In patients with basal-like tumours treated with modified FOLFIRINOX (mFFX) (n=22) the progression rate was 60% compared to 15% in classical PDAC (p= 0.0002). Median OS in the intention to treat population (n=195) was 9.3 months for classical vs. 5.9 months for basal-like PDAC (HR 0.47 95% CI 0.32-0.69, p=0.0001). GATA6 expression by RNAseq highly correlated with the classifier (p&lt;0.001) and ISH predicted the subtypes with sensitivity of 89% and specificity of 83%. In a multivariable analysis, GATA6 expression was prognostic (p=0.02). In exploratory analyses, basal-like tumours, could be identified by keratin 5, were more hypoxic and enriched for a T cell inflamed gene expression signature. CONCLUSIONS: The basal-like subtype is chemoresistant and can be distinguished from classical PDAC by GATA6 expression.",
+				"technology" : [ "Illumina HiSeq 2500", "unspecified" ],
+				"numSamples" : 195,
+				"datasetTypes" : [ "Transcriptome profiling by high-throughput sequencing" ],
+				"datasetLinks" : [ ],
+				"attributes" : [ ],
+				"policyStableId" : "EGAP00001000695",
+				"files" : null,
+				"availableInBeacon" : false,
+				"accessType" : "CONTROLLED"
+			}
+		]
+	}
+}

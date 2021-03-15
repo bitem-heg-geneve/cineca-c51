@@ -1,0 +1,53 @@
+{
+	"response" : {
+		"numTotalResults" : 3,
+		"resultType" : "studies",
+		"result" : [
+			{
+				"alias" : "ena-STUDY-BIOPIC-24-09-2019-02:14:46:225-177",
+				"egaStableId" : "EGAS00001003889",
+				"centerName" : "BIOPIC",
+				"creationTime" : "2019-09-24T02:49.000Z",
+				"published" : true,
+				"released" : "RELEASED",
+				"releasedDate" : "2019-10-02T00:00.000Z",
+				"title" : "Studying the single cell characteristics of pancreatic cancer",
+				"description" : "Pancreatic cancer is a dangerous malignancy in the pancreas. In this study we use single-cell RNA sequencing technique to help understand the transcriptome characteristics of pancreatic tumor cells. This study help understands the complex microenvironment of pancreatic tumors and will likely to benefit clinical research of pancreatic cancer treatments.",
+				"studyAbstract" : "Pancreatic cancer is a dangerous malignancy in the pancreas. In this study we use single-cell RNA sequencing technique to help understand the transcriptome characteristics of pancreatic tumor cells. This study help understands the complex microenvironment of pancreatic tumors and will likely to benefit clinical research of pancreatic cancer treatments.",
+				"studyType" : "Other",
+				"pubMedIds" : null,
+				"customTags" : null
+			},
+			{
+				"alias" : "Pancreatic Cancer Case Control Association Study",
+				"egaStableId" : "phs000648",
+				"centerName" : null,
+				"creationTime" : "2013-08-06T00:00.000Z",
+				"published" : true,
+				"released" : "RELEASED",
+				"releasedDate" : "2015-06-22T00:00.000Z",
+				"title" : "Pancreatic Cancer Case Control Association Study",
+				"description" : "\n<p>Pancreatic cancer is the 4th leading cause of cancer death in the United States. This is in large part due to the rapidly fatal course of this disease, as the vast majority of patients die within months of diagnosis and the five-year survival rate is less than 5. We have brought together over 8000 participants from 9 studies of pancreatic cancer, to conduct a GWAS of pancreatic cancer. The studies were drawn from the Pancreatic Cancer Case-Control consortium and include case-control studies from the United States, Europe and Australia. Sites include: Johns Hopkins National Familial Pancreas Tumor Registry, Mayo Clinic Biospecimen Resource for Pancreas Research, Ontario Pancreas Cancer Study (OPCS), Yale University, MD Anderson Case Control Study, Queensland Pancreatic Cancer Study, University of California San Francisco Molecular Epidemiology of Pancreatic Cancer Study, International Agency of Cancer Research and Memorial Sloan Kettering Cancer Center</p>",
+				"studyAbstract" : "Pancreatic Cancer Case Control Association Study",
+				"studyType" : "Case-Control",
+				"pubMedIds" : null,
+				"customTags" : null
+			},
+			{
+				"alias" : "4a473798-3c0b-4369-8a4f-a594ff2dd441",
+				"egaStableId" : "EGAS00001004706",
+				"centerName" : "CMCB",
+				"creationTime" : "2020-10-07T13:48.000Z",
+				"published" : true,
+				"released" : "RELEASED",
+				"releasedDate" : "2021-02-17T00:00.000Z",
+				"title" : "Pancreatic cancer RNA sequencing",
+				"description" : "For optimal pancreatic cancer treatment, early and accurate diagnosis is vital. Blood-derived biomarkers and genetic predispositions can contribute to early diagnosis, but they often have limited accuracy or applicability. Here, we seek to exploit the synergy between both approaches by combining the standard clinical blood biomarker CA19-9 with novel genetic variants. Concretely, we aim to use deep sequencing and deep learning to improve pancreatic cancer diagnosis, to differentiate between resectable pancreatic ductal adenocarcinoma (rPDAC) from chronic pancreatitis (CP), and to estimate survival.\n\nWe obtained samples of nucleated cells found in peripheral blood from over 300 patients suffering from resectable pancreatic ductal adenocarcinoma, non-resectable pancreatic cancer (nrPC), chronic pancreatitis or none of these. We sequenced RNA with high coverage and reduced millions of raw to hundreds of high-quality, significant genetic variants. Together with CA19-9 levels, these served as input to deep learning to separate cancer from non-cancer, resectable PDAC from chronic pancreatitis, and resectable from non-resectable cancer.\n\nAll deep learning models achieved area under the curve (AUC) scores of over 90%. In particular, differentiating resectable PDAC from pancreatitis can be solved with an AUC of 98%. Moreover, we identified genetic variants to estimate survival in rPDAC patients.\n\nOverall, we show that the blood transcriptome harbours genetic variants, which substantially improve non-invasive clinical diagnosis and patient stratification in pancreatic cancer.",
+				"studyAbstract" : "For optimal pancreatic cancer treatment, early and accurate diagnosis is vital. Blood-derived biomarkers and genetic predispositions can contribute to early diagnosis, but they often have limited accuracy or applicability. Here, we seek to exploit the synergy between both approaches by combining the standard clinical blood biomarker CA19-9 with novel genetic variants. Concretely, we aim to use deep sequencing and deep learning to improve pancreatic cancer diagnosis, to differentiate between resectable pancreatic ductal adenocarcinoma (rPDAC) from chronic pancreatitis (CP), and to estimate survival.\n\nWe obtained samples of nucleated cells found in peripheral blood from over 300 patients suffering from resectable pancreatic ductal adenocarcinoma, non-resectable pancreatic cancer (nrPC), chronic pancreatitis or none of these. We sequenced RNA with high coverage and reduced millions of raw to hundreds of high-quality, significant genetic variants. Together with CA19-9 levels, these served as input to deep learning to separate cancer from non-cancer, resectable PDAC from chronic pancreatitis, and resectable from non-resectable cancer.\n\nAll deep learning models achieved area under the curve (AUC) scores of over 90%. In particular, differentiating resectable PDAC from pancreatitis can be solved with an AUC of 98%. Moreover, we identified genetic variants to estimate survival in rPDAC patients.\n\nOverall, we show that the blood transcriptome harbours genetic variants, which substantially improve non-invasive clinical diagnosis and patient stratification in pancreatic cancer.",
+				"studyType" : "Other",
+				"pubMedIds" : null,
+				"customTags" : null
+			}
+		]
+	}
+}
