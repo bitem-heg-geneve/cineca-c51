@@ -1,3 +1,85 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.pam-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 0px;
+  background-color: #ffffff;
+}
+
+.pam-mini {
+  font-size: 8px;
+}
+
+.toto {
+  color: #000088;
+  background-color:#ff00ff;
+}
+
+.pam-header {
+  margin: 1px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 10px;
+  background-color: #000000;
+  color:#ffffff;
+  font-weight: bold;
+  #text-align: center;
+}
+
+.pam-nav {
+  margin: 1px;
+  margin-bottom: 0px;
+  padding: 10px;
+  background-color: #000000;
+}
+
+.pam-nav-text {
+  color: rgb(97, 218, 251);
+  font-weight: bold;
+}
+
+.pam-link {
+  color: rgb(97, 218, 251);
+}
+
+.pam-link-current {
+  background-color: rgb(97, 218, 251);
+  color: black;
+}
+
+.pam-link-disabled {
+  color: white;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+
+
+.pam-main {
+  margin: 1px;
+  margin-bottom: 0px;
+  padding: 10px;
+  background-color: #f3f3f3;
+  flex-grow: 1;
+}
+
+.pam-footer {
+  margin: 1px;
+  margin-bottom: 0px;
+  padding: 10px;
+  background-color: #000000;
+  color:#ffffff;
+  font-size: x-small;
+  text-align: center;
+}
+
+/* ----------------------------------- */
+
 .App {
   text-align: center;
 }
@@ -5,6 +87,11 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.mydiv {
+  border-style: solid;
+  border-width: thin;
 }
 
 @media (prefers-reduced-motion: no-preference) {
