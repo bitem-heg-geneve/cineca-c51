@@ -28,7 +28,7 @@ or \
 Install additional dependencies of the project
 
 `npm install --save react-router-dom` \
-`npm install --save evergreen-ui` \
+`npm install --save evergreen-ui`
 
 ## Run it locally
 
@@ -36,7 +36,7 @@ In the project directory
 
 Start the backend:
 
-`python3 cineca_httpserver.py &` \
+`python3 cineca_httpserver.py &`
 
 Run the app in the development mode
 
