@@ -1,18 +1,16 @@
 body {
-  display: flex;
-  flex-direction: column;
 }
 
 .pam-wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  position: absolute; top:0; bottom:0; left:0; right:0;
+  display: flex; flex-direction: column; min-height: 0;
   padding: 0px;
   background-color: #ffffff;
 }
 
-.pam-mini {
+.pam-debug {
   font-size: 8px;
+  display:none;
 }
 
 .toto {
@@ -58,14 +56,13 @@ body {
   text-decoration: none;
 }
 
-
-
 .pam-main {
   margin: 1px;
   margin-bottom: 0px;
   padding: 10px;
   background-color: #f3f3f3;
   flex-grow: 1;
+  display: flex; flex-direction: column; min-height: 0;
 }
 
 .pam-footer {
@@ -76,6 +73,27 @@ body {
   color:#ffffff;
   font-size: x-small;
   text-align: center;
+}
+
+.pam-query-string {
+  font-size: smaller;
+  font-weight: normal;
+}
+.pam-cell-div {
+  height: auto;
+  white-space: normal;
+}
+
+.pam-flex-wrapper {
+  display: flex; flex-direction: column; min-height:0;
+  flex-grow: 1;
+  padding: 0px;
+}
+
+.pam-flexible {
+  flex-grow: 1; overflow-y: scroll;
+  min-height:0;
+
 }
 
 /* ----------------------------------- */

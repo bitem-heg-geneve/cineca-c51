@@ -1,5 +1,4 @@
 import './App.css';
-//import './Step2.css';
 import React from 'react';
 import { Table } from 'evergreen-ui'
 import { useHistory } from "react-router-dom";
@@ -17,7 +16,7 @@ function getUrlParam(name) {
 }
 
 function Header(props) {
-  return (<h3>Step2 - Studies related to query <span className="pam-query-string">"{decodeURI(getUrlParam('query'))}"</span></h3> );
+  return (<h3>Step3 - Datasets of study {getUrlParam('query')}</h3> );
 }
 
 function Debug(props) {
@@ -28,28 +27,30 @@ function Debug(props) {
 }
 
 
-function StudyTable(props) {
-
-  const history = useHistory();
-  const navigateTo = (id) => history.push('/Step3?query=' + id);
+function DatasetTable(props) {
 
   return (
      <Table backgroundColor={'#eeeeee'}>
         <Table.Head width="100%" paddingLeft={0}>
           <Table.TextHeaderCell>EGA stableId</Table.TextHeaderCell>
           <Table.TextHeaderCell>Title</Table.TextHeaderCell>
-          <Table.TextHeaderCell>Study type</Table.TextHeaderCell>
+          <Table.TextHeaderCell>Dataset types</Table.TextHeaderCell>
           <Table.TextHeaderCell flexBasis={'30%'} flexShrink={0} flexGrow={0} >Description</Table.TextHeaderCell>
-          <Table.TextHeaderCell flexBasis={'30%'} flexShrink={0} flexGrow={0} >Study abstract</Table.TextHeaderCell>
+          <Table.TextHeaderCell>Access type</Table.TextHeaderCell>
+          <Table.TextHeaderCell>Center name</Table.TextHeaderCell>
+          <Table.TextHeaderCell>Technology(ies)</Table.TextHeaderCell>
+
         </Table.Head>
         <Table.Body width="100%" paddingLeft={0}>
-          {props.studies.map((study, index) => (
-            <Table.Row height="auto" key={index} isSelectable onSelect={() => navigateTo(study.egaStableId)}>
-              <Table.TextCell>{study.egaStableId}</Table.TextCell>
-              <Table.TextCell><div className="pam-cell-div">{study.title}</div></Table.TextCell>
-              <Table.TextCell>{study.studyType}</Table.TextCell>
-              <Table.TextCell flexBasis={'30%'} flexShrink={0} flexGrow={0} ><div className="pam-cell-div">{study.description}</div></Table.TextCell>
-              <Table.TextCell flexBasis={'30%'} flexShrink={0} flexGrow={0} ><div className="pam-cell-div">{study.studyAbstract}</div></Table.TextCell>
+          {props.datasets.map((dataset, index) => (
+            <Table.Row height="auto" key={index} isSelectable onSelect={() => alert(dataset.egaStableId)}>
+              <Table.TextCell>{dataset.egaStableId}</Table.TextCell>
+              <Table.TextCell><div className="pam-cell-div">{dataset.title}</div></Table.TextCell>
+              <Table.TextCell>{dataset.datasetType}</Table.TextCell>
+              <Table.TextCell flexBasis={'30%'} flexShrink={0} flexGrow={0} ><div className="pam-cell-div">{dataset.description}</div></Table.TextCell>
+              <Table.TextCell>{dataset.accessType}</Table.TextCell>
+              <Table.TextCell>{dataset.centerName}</Table.TextCell>
+              <Table.TextCell>{dataset.technology}</Table.TextCell>
             </Table.Row>
           ))}
         </Table.Body>
@@ -57,8 +58,17 @@ function StudyTable(props) {
 );
 }
 
+function MainContent(props) {
+  if (props.status=='waiting') return <p>Waiting...</p>;
+  if (props.status=='no data') return <p>Found no info about datasets related to this study</p>;
+  return (
+    <div className="pam-flexible">
+      <DatasetTable datasets={props.datasets} />
+    </div>);
+}
 
-class Step2 extends React.Component {
+
+class Step3 extends React.Component {
 
   constructor(props) {
     super(props);
@@ -66,10 +76,9 @@ class Step2 extends React.Component {
   }
 
   _loadAsyncData(query) {
-    // let url = 'https://denver.text-analytics.ch/fake_EGA/EGA_studies_pancreatic_cancer.json';
-    // let url = "https://candy.hesge.ch/fake_EGA/EGA_studies_pancreatic_cancer.json";
-    // external URL requires server to 'Access-Control-Allow-Origin' from anywhere (CORS)
-    let url = 'http://localhost:8088/bitem/cineca/fake/fake_studies.json'
+    // example: query=EGAS00001003889
+    // TODO?: use proxy python rather than diretct access to ega-archive
+    let url = 'https://ega-archive.org/metadata/v2/datasets?queryBy=study&queryId=' + query + '&limit=0';
 
     fetch(url)
       .then(this.handleFetchError)
@@ -115,27 +124,30 @@ class Step2 extends React.Component {
 
     console.log('rendering, props, state', this.props, this.state);
 
-    if (this.state.externalData == {}) {
-      return   <div className="pam-flex-wrapper"><Header/><Debug/><p>No data</p></div>
+    var status = 'waiting';
+    var datasets = [];
+    if (this.state.externalData == {}) status = 'no data';
+    if (this.state.externalData && this.state.externalData.response) {
+      datasets = this.state.externalData.response.result;
+      if (this.state.externalData.response.result.length == 0) status = 'no data';
+      if (this.state.externalData.response.result.length  > 0) status = 'ok';
     }
 
-    if (this.state.externalData.data && this.state.externalData.data.length > 0) {
-      const studies = this.state.externalData.data;
-      return (
-        <div className="pam-flex-wrapper">
-          <Header/>
-          <Debug/>
-          <div className="pam-flexible">
-            <StudyTable studies={studies} />
-          </div>
-        </div>
-      );
-    }
-
-    return <div className="pam-flex-wrapper"><Header/><Debug/><p>Waiting...</p></div>;
-
-  }
+    return (
+      <div className="pam-flex-wrapper">
+        <Header/>
+        <Debug/>
+        <MainContent datasets={datasets} status={status} />
+      </div>
+    );
 }
 
 
-export default Step2;
+
+
+
+
+}
+
+
+export default Step3;

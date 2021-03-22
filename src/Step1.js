@@ -29,8 +29,8 @@ class Step1 extends React.Component {
     //console.log('rendering with state query', this.state.query);
     return (
       <div>
-        <h3>Step1</h3>
-        <p className="pam-mini">State query is: {this.state.query}</p>
+        <h3>Step1 - Search studies</h3>
+        <p className="pam-debug">State query is: {this.state.query}</p>
         <form>
         <SearchInput placeholder="Enter your query..." width="300px" value={this.state.query} onChange={this.handleChange} />
         <br />
