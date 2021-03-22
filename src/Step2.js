@@ -1,5 +1,4 @@
 import './App.css';
-//import './Step2.css';
 import React from 'react';
 import { Table } from 'evergreen-ui'
 import { useHistory } from "react-router-dom";

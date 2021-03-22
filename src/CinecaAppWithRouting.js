@@ -1,5 +1,4 @@
 import './App.css';
-import './Step2.css';
 import React from 'react';
 import Step1 from './Step1';
 import Step2 from './Step2';
