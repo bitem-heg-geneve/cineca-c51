@@ -54,7 +54,7 @@ class GP(BaseHTTPRequestHandler):
             if self.path[0:19]=='/bitem/cineca/fake/':
                 fname = self.path[19:]
                 fullname = base_dir + fname
-                print('serving fake file: ' + fullname)
+                print('serving fake file: ' + fullname, flush=True)
 
                 data=None
                 nf = open(fullname, 'r')
@@ -77,7 +77,7 @@ class GP(BaseHTTPRequestHandler):
         except:
             error_msg = str(sys.exc_info()[1])
 
-        print(error_msg)
+        print(error_msg, flush=True)
         obj = self.buildErrorResponseObject(self.path, error_msg)
         self.sendJsonResponse(obj,400)
 
@@ -85,11 +85,15 @@ class GP(BaseHTTPRequestHandler):
 def run(server_class=HTTPServer, handler_class=GP, port=8088):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
-    print('Cineca Server running at localhost:8088...')
+    print('Cineca Server running at localhost:8088...', flush=True)
     httpd.serve_forever()
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Main
 # - - - - - - - - - - - - - - - - - - - - - - - - - -
 base_dir="./data/"
-run()
+
+if __name__ == '__main__':
+    sys.stdout = open('cineca_python_proxy.log', 'w')
+    sys.stderr = open('cineca_python_proxy.err', 'w')
+    run()
