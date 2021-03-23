@@ -65,10 +65,10 @@ class Step2 extends React.Component {
   }
 
   _loadAsyncData(query) {
-    // let url = 'https://denver.text-analytics.ch/fake_EGA/EGA_studies_pancreatic_cancer.json';
-    // let url = "https://candy.hesge.ch/fake_EGA/EGA_studies_pancreatic_cancer.json";
     // external URL requires server to 'Access-Control-Allow-Origin' from anywhere (CORS)
-    let url = 'http://localhost:8088/bitem/cineca/fake/fake_studies.json'
+    // the python service behind https://denver.text-analytics.ch is CORS compatible
+    let url = 'https://denver.text-analytics.ch/bitem/cineca/fake/fake_studies.json';
+    //let url = 'http://localhost:8088/bitem/cineca/fake/fake_studies.json'
 
     fetch(url)
       .then(this.handleFetchError)
