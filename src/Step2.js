@@ -32,8 +32,8 @@ function StudyTable(props) {
   const navigateTo = (id) => history.push('/Step3?query=' + id);
 
   return (
-     <table backgroundColor={'#eeeeee'}>
-        <thead width="100%" paddingLeft={0}>
+     <table>
+        <thead>
           <tr>
             <th>EGA stableId</th>
             <th>Title</th>
@@ -42,7 +42,7 @@ function StudyTable(props) {
             <th>Study abstract</th>
           </tr>
         </thead>
-        <tbody width="100%" paddingLeft={0}>
+        <tbody>
           {props.studies.map((study, index) => (
             <tr height="auto" key={index} onClick={() => navigateTo(study.egaStableId)}>
               <td>{study.egaStableId}</td>

@@ -12,15 +12,14 @@ td, th {
   border-bottom: #cccccc thin solid;
 }
 
-table tr:hover td {
-    opacity: 0.9;
-}
-
 tr {
   background-color: #65cdff;
   opacity: 1;
 }
 
+table tr:hover td {
+    opacity: 0.9;
+}
 
 th {
   position:sticky;

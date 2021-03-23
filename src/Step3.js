@@ -29,8 +29,8 @@ function Debug(props) {
 function DatasetTable(props) {
 
   return (
-     <table backgroundColor={'#eeeeee'}>
-        <thead width="100%" paddingLeft={0}>
+     <table>
+        <thead>
           <tr>
           <th>EGA stableId</th>
           <th>Title</th>
@@ -41,13 +41,13 @@ function DatasetTable(props) {
           <th>Technology(ies)</th>
           </tr>
         </thead>
-        <tbody width="100%" paddingLeft={0}>
+        <tbody >
           {props.datasets.map((dataset, index) => (
-            <tr height="auto" key={index}  onClick={() => alert(dataset.egaStableId)}>
+            <tr key={index}  onClick={() => alert(dataset.egaStableId)}>
               <td>{dataset.egaStableId}</td>
-              <td><div className="pam-cell-div">{dataset.title}</div></td>
+              <td>{dataset.title}</td>
               <td>{dataset.datasetTypes}</td>
-              <td><div className="pam-cell-div">{dataset.description}</div></td>
+              <td>{dataset.description}</td>
               <td>{dataset.accessType}</td>
               <td>{dataset.centerName}</td>
               <td>{dataset.technology}</td>

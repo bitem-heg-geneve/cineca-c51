@@ -7,6 +7,7 @@ import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 
 function App(props) {
 
+  console.log('rendering app');
   return (
     <BrowserRouter basename={process.env.REACT_APP_MYBASENAME}>
       <div className="pam-wrapper">
