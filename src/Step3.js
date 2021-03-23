@@ -1,6 +1,5 @@
 import './App.css';
 import React from 'react';
-import { Table } from 'evergreen-ui'
 import { useHistory } from "react-router-dom";
 
 
@@ -30,31 +29,32 @@ function Debug(props) {
 function DatasetTable(props) {
 
   return (
-     <Table backgroundColor={'#eeeeee'}>
-        <Table.Head width="100%" paddingLeft={0}>
-          <Table.TextHeaderCell>EGA stableId</Table.TextHeaderCell>
-          <Table.TextHeaderCell>Title</Table.TextHeaderCell>
-          <Table.TextHeaderCell>Dataset types</Table.TextHeaderCell>
-          <Table.TextHeaderCell flexBasis={'30%'} flexShrink={0} flexGrow={0} >Description</Table.TextHeaderCell>
-          <Table.TextHeaderCell>Access type</Table.TextHeaderCell>
-          <Table.TextHeaderCell>Center name</Table.TextHeaderCell>
-          <Table.TextHeaderCell>Technology(ies)</Table.TextHeaderCell>
-
-        </Table.Head>
-        <Table.Body width="100%" paddingLeft={0}>
+     <table backgroundColor={'#eeeeee'}>
+        <thead width="100%" paddingLeft={0}>
+          <tr>
+          <th>EGA stableId</th>
+          <th>Title</th>
+          <th>Dataset types</th>
+          <th>Description</th>
+          <th>Access type</th>
+          <th>Center name</th>
+          <th>Technology(ies)</th>
+          </tr>
+        </thead>
+        <tbody width="100%" paddingLeft={0}>
           {props.datasets.map((dataset, index) => (
-            <Table.Row height="auto" key={index} isSelectable onSelect={() => alert(dataset.egaStableId)}>
-              <Table.TextCell>{dataset.egaStableId}</Table.TextCell>
-              <Table.TextCell><div className="pam-cell-div">{dataset.title}</div></Table.TextCell>
-              <Table.TextCell>{dataset.datasetType}</Table.TextCell>
-              <Table.TextCell flexBasis={'30%'} flexShrink={0} flexGrow={0} ><div className="pam-cell-div">{dataset.description}</div></Table.TextCell>
-              <Table.TextCell>{dataset.accessType}</Table.TextCell>
-              <Table.TextCell>{dataset.centerName}</Table.TextCell>
-              <Table.TextCell>{dataset.technology}</Table.TextCell>
-            </Table.Row>
+            <tr height="auto" key={index}  onClick={() => alert(dataset.egaStableId)}>
+              <td>{dataset.egaStableId}</td>
+              <td><div className="pam-cell-div">{dataset.title}</div></td>
+              <td>{dataset.datasetTypes}</td>
+              <td><div className="pam-cell-div">{dataset.description}</div></td>
+              <td>{dataset.accessType}</td>
+              <td>{dataset.centerName}</td>
+              <td>{dataset.technology}</td>
+            </tr>
           ))}
-        </Table.Body>
-      </Table>
+        </tbody>
+      </table>
 );
 }
 

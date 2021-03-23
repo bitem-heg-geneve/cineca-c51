@@ -1,6 +1,35 @@
 body {
 }
 
+table {
+  border-collapse: collapse;
+}
+
+td, th {
+  font-size: small;
+  background-color: #f3f3f3;
+  padding: 8px;
+  border-bottom: #cccccc thin solid;
+}
+
+table tr:hover td {
+    opacity: 0.9;
+}
+
+tr {
+  background-color: #65cdff;
+  opacity: 1;
+}
+
+
+th {
+  position:sticky;
+  top: 0;
+  text-align: left;
+  background-color: #65cdff;
+  white-space: nowrap;
+}
+
 .pam-wrapper {
   position: absolute; top:0; bottom:0; left:0; right:0;
   display: flex; flex-direction: column; min-height: 0;
@@ -37,16 +66,16 @@ body {
 }
 
 .pam-nav-text {
-  color: rgb(97, 218, 251);
+  color: #65cdff;
   font-weight: bold;
 }
 
 .pam-link {
-  color: rgb(97, 218, 251);
+  color: #65cdff;
 }
 
 .pam-link-current {
-  background-color: rgb(97, 218, 251);
+  background-color: #65cdff;
   color: black;
 }
 
@@ -78,10 +107,6 @@ body {
 .pam-query-string {
   font-size: smaller;
   font-weight: normal;
-}
-.pam-cell-div {
-  height: auto;
-  white-space: normal;
 }
 
 .pam-flex-wrapper {

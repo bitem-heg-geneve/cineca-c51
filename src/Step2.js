@@ -1,6 +1,5 @@
 import './App.css';
 import React from 'react';
-import { Table } from 'evergreen-ui'
 import { useHistory } from "react-router-dom";
 
 
@@ -33,29 +32,30 @@ function StudyTable(props) {
   const navigateTo = (id) => history.push('/Step3?query=' + id);
 
   return (
-     <Table backgroundColor={'#eeeeee'}>
-        <Table.Head width="100%" paddingLeft={0}>
-          <Table.TextHeaderCell>EGA stableId</Table.TextHeaderCell>
-          <Table.TextHeaderCell>Title</Table.TextHeaderCell>
-          <Table.TextHeaderCell>Study type</Table.TextHeaderCell>
-          <Table.TextHeaderCell flexBasis={'30%'} flexShrink={0} flexGrow={0} >Description</Table.TextHeaderCell>
-          <Table.TextHeaderCell flexBasis={'30%'} flexShrink={0} flexGrow={0} >Study abstract</Table.TextHeaderCell>
-        </Table.Head>
-        <Table.Body width="100%" paddingLeft={0}>
+     <table backgroundColor={'#eeeeee'}>
+        <thead width="100%" paddingLeft={0}>
+          <tr>
+            <th>EGA stableId</th>
+            <th>Title</th>
+            <th>Study type</th>
+            <th>Description</th>
+            <th>Study abstract</th>
+          </tr>
+        </thead>
+        <tbody width="100%" paddingLeft={0}>
           {props.studies.map((study, index) => (
-            <Table.Row height="auto" key={index} isSelectable onSelect={() => navigateTo(study.egaStableId)}>
-              <Table.TextCell>{study.egaStableId}</Table.TextCell>
-              <Table.TextCell><div className="pam-cell-div">{study.title}</div></Table.TextCell>
-              <Table.TextCell>{study.studyType}</Table.TextCell>
-              <Table.TextCell flexBasis={'30%'} flexShrink={0} flexGrow={0} ><div className="pam-cell-div">{study.description}</div></Table.TextCell>
-              <Table.TextCell flexBasis={'30%'} flexShrink={0} flexGrow={0} ><div className="pam-cell-div">{study.studyAbstract}</div></Table.TextCell>
-            </Table.Row>
+            <tr height="auto" key={index} onClick={() => navigateTo(study.egaStableId)}>
+              <td>{study.egaStableId}</td>
+              <td>{study.title}</td>
+              <td>{study.studyType}</td>
+              <td>{study.description}</td>
+              <td>{study.studyAbstract}</td>
+            </tr>
           ))}
-        </Table.Body>
-      </Table>
+        </tbody>
+      </table>
 );
 }
-
 
 class Step2 extends React.Component {
 
