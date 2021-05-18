@@ -32,7 +32,7 @@ function StudyTable(props) {
   const navigateTo = (id) => history.push('/Step3?query=' + id);
 
   return (
-     <table>
+     <table >
         <thead>
           <tr>
             <th>EGA stableId</th>
@@ -44,11 +44,11 @@ function StudyTable(props) {
         </thead>
         <tbody>
           {props.studies.map((study, index) => (
-            <tr height="auto" key={index} onClick={() => navigateTo(study.egaStableId)}>
+            <tr key={index} onClick={() => navigateTo(study.egaStableId)}>
               <td>{study.egaStableId}</td>
               <td>{study.title}</td>
               <td>{study.studyType}</td>
-              <td>{study.description}</td>
+              <td className="htmlcell" dangerouslySetInnerHTML={{__html: study.description}}></td>
               <td>{study.studyAbstract}</td>
             </tr>
           ))}
@@ -67,7 +67,8 @@ class Step2 extends React.Component {
   _loadAsyncData(query) {
     // external URL requires server to 'Access-Control-Allow-Origin' from anywhere (CORS)
     // the python service behind https://denver.text-analytics.ch is CORS compatible
-    let url = 'https://denver.text-analytics.ch/bitem/cineca/fake/fake_studies.json';
+    //let url = 'https://denver.text-analytics.ch/bitem/cineca/proxy/fake/fake_studies.json';
+    let url = 'http://localhost:8088/bitem/cineca/proxy/ega_studies/_search?size=20&q=' + query;
     //let url = 'http://localhost:8088/bitem/cineca/fake/fake_studies.json'
 
     fetch(url)

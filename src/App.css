@@ -10,6 +10,7 @@ td, th {
   background-color: #f3f3f3;
   padding: 8px;
   border-bottom: #cccccc thin solid;
+  vertical-align: top;
 }
 
 tr {

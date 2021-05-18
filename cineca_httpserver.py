@@ -51,8 +51,37 @@ class GP(BaseHTTPRequestHandler):
         error_msg='ERROR, invalid URL: ' + self.path
 
         try:
-            if self.path[0:19]=='/bitem/cineca/fake/':
-                fname = self.path[19:]
+
+            print('GET request', self.path, flush=True)
+
+            if self.path[0:32]=='/bitem/cineca/proxy/ega_studies/':
+
+                #connection = http.client.HTTPConnection("localhost:9200")
+                connection = http.client.HTTPSConnection("denver.text-analytics.ch")
+                url = '/bitem/ega_studies/' + self.path[32:]
+                print('PROXY', url, flush=True)
+                connection.request("GET", url)
+                response = connection.getresponse()
+                if response.status != 200:
+                    error_msg = "Remote server returned an error: " + response.reason
+                    obj = self.buildErrorResponseObject(self.path, error_msg)
+                    self.sendJsonResponse(obj,400)
+                    return
+                    
+                data = response.read().decode("utf-8")
+                obj = json.loads(data)
+                studies = list()
+                for hit in obj["hits"]["hits"]:
+                    study = hit["_source"]
+                    studies.append(study)
+
+                response = self.buildSuccessResponseObject(self.path, studies)
+                self.sendJsonResponse(response, 200)
+                return
+
+
+            elif self.path[0:25]=='/bitem/cineca/proxy/fake/':
+                fname = self.path[25:]
                 fullname = base_dir + fname
                 print('serving fake file: ' + fullname, flush=True)
 
@@ -69,7 +98,8 @@ class GP(BaseHTTPRequestHandler):
                 else:
                     err_msg = 'Could not read content from file: ' + fullname
 
-            elif self.path[0:18]=='/bitem/cineca/toto':
+
+            elif self.path[0:24]=='/bitem/cineca/proxy/toto':
                 response = self.buildSuccessResponseObject(self.path, {'toto': 'happy'})
                 self.sendJsonResponse(response, 200)
                 return
