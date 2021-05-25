@@ -67,9 +67,8 @@ class Step2 extends React.Component {
   _loadAsyncData(query) {
     // external URL requires server to 'Access-Control-Allow-Origin' from anywhere (CORS)
     // the python service behind https://denver.text-analytics.ch is CORS compatible
-    //let url = 'https://denver.text-analytics.ch/bitem/cineca/proxy/fake/fake_studies.json';
-    let url = 'http://localhost:8088/bitem/cineca/proxy/ega_studies/_search?size=20&q=' + query;
-    //let url = 'http://localhost:8088/bitem/cineca/fake/fake_studies.json'
+    //let url = 'http://localhost:8088/bitem/cineca/proxy/ega_studies/_search?size=20&q=' + query;
+    let url = 'https://denver.text-analytics.ch/bitem/cineca/proxy/ega_studies/_search?size=20&q=' + query;
 
     fetch(url)
       .then(this.handleFetchError)
