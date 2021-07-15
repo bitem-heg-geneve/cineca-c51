@@ -15,14 +15,15 @@ td, th {
 
 tr {
   background-color: #65cdff;
-  opacity: 1;
+  xopacity: 1;
 }
 
 table tr:hover td {
-    opacity: 0.9;
+  background-color: #fafafa;
 }
 
 th {
+  z-index: 10;
   position:sticky;
   top: 0;
   text-align: left;
@@ -119,6 +120,36 @@ th {
   flex-grow: 1; overflow-y: scroll;
   min-height:0;
 
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip .tooltiptext {
+  border-color: #cccccc;
+  border-width: thin;
+  border-style: solid;
+  border-radius: 2px;
+
+
+  background-color: #fafafa;
+  color: #black;
+
+  padding: 8px;
+  overflow: auto;
+
+  position: absolute;
+  width: inherit;
+  max-height: 240px;
+  top: -6px;
+  left: -8px;
+  display: none;
+}
+
+.tooltip:hover .tooltiptext {
+  z-index: 1;
+  display: block;
 }
 
 /* ----------------------------------- */

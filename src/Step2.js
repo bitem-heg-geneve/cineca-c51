@@ -26,6 +26,38 @@ function Debug(props) {
 }
 
 
+function shorten(txt, max_lng) {
+  return txt && txt.length && txt.length > max_lng ? txt.substr(0, max_lng) + ' ...' : txt;
+}
+
+function BigTextDiv(props) {
+  var lng = props.content.length;
+  var max = parseInt(props.maxlng);
+  if (lng <= max) {
+    return ( <div className="tooltip">{props.content}</div> )
+  } else {
+    return (
+      <div className="tooltip">{shorten(props.content, max)}
+        <div className="tooltiptext">{props.content}</div>
+      </div>
+    )
+  }
+}
+
+function BigHtmlDiv(props) {
+  var lng = props.content.length;
+  var max = parseInt(props.maxlng);
+  if (lng <= max) {
+    return ( <div className="tooltip" dangerouslySetInnerHTML={{__html: props.content}}></div> )
+  } else {
+    return (
+      <div className="tooltip">{shorten(props.content, max)}
+        <div className="tooltiptext" dangerouslySetInnerHTML={{__html: props.content}}></div>
+      </div>
+    )
+  }
+}
+
 function StudyTable(props) {
 
   const history = useHistory();
@@ -48,8 +80,8 @@ function StudyTable(props) {
               <td>{study.egaStableId}</td>
               <td>{study.title}</td>
               <td>{study.studyType}</td>
-              <td className="htmlcell" dangerouslySetInnerHTML={{__html: study.description}}></td>
-              <td>{study.studyAbstract}</td>
+              <td><BigHtmlDiv content={study.description} maxlng="200"></BigHtmlDiv></td>
+              <td><BigTextDiv content={study.studyAbstract} maxlng="200"></BigTextDiv></td>
             </tr>
           ))}
         </tbody>
