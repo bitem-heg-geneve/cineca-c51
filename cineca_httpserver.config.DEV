@@ -1,0 +1,7 @@
+#
+# config for DEV
+#
+
+EGA_STUDIES.protocol=https
+EGA_STUDIES.server=denver.text-analytics.ch
+EGA_STUDIES.baseurl=/local/ega_studies/

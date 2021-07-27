@@ -1,0 +1,7 @@
+#
+# config for PROD (on denver server)
+#
+
+EGA_STUDIES.protocol=http
+EGA_STUDIES.server=localhost:9200
+EGA_STUDIES.baseurl=/ega_studies/
