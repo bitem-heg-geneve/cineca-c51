@@ -77,7 +77,7 @@ class Step3 extends React.Component {
 
   _loadAsyncData(query) {
     // example: query=EGAS00001003889
-    // TODO?: use proxy python rather than diretct access to ega-archive
+    // TODO?: use proxy python rather than direct access to ega-archive
     let url = 'https://ega-archive.org/metadata/v2/datasets?queryBy=study&queryId=' + query + '&limit=0';
 
     fetch(url)

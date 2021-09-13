@@ -122,6 +122,10 @@ th {
 
 }
 
+.pam-fit-content {
+  width: fit-content;
+}
+
 .tooltip {
   position: relative;
 }

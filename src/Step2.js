@@ -1,6 +1,8 @@
 import './App.css';
 import React from 'react';
 import { useHistory } from "react-router-dom";
+import { Button } from 'evergreen-ui'
+
 
 
 function getUrlParam(name) {
@@ -31,7 +33,7 @@ function shorten(txt, max_lng) {
 }
 
 function BigTextDiv(props) {
-  var lng = props.content.length;
+  var lng = props.content ? props.content.length : 0;
   var max = parseInt(props.maxlng);
   if (lng <= max) {
     return ( <div className="tooltip">{props.content}</div> )
@@ -58,15 +60,41 @@ function BigHtmlDiv(props) {
   }
 }
 
+function GotoStep3Button(props) {
+
+  const history = useHistory();
+
+  function navigateTo(id) {
+    var nodes = document.getElementsByName("checked_studies");
+    console.log(nodes);
+    var study_list=[];
+    for (var i=0; i< nodes.length;i++) {
+      var cb = nodes[i];
+      if (cb.checked) study_list.push(cb.value);
+    }
+    var studies = study_list.join(",");
+    history.push('/Step3?query=' + studies);
+  }
+
+  return (
+   <Button className="pam-fit-content" type="button" onClick={navigateTo} appearance="primary" fontSize={'16px'} padding={'10px'} >Expand / Details</Button>
+  );
+}
+
+
 function StudyTable(props) {
 
   const history = useHistory();
-  const navigateTo = (id) => history.push('/Step3?query=' + id);
+  function navigateTo(id) {
+    // disabled: we need multiple row selection
+    //history.push('/Step3?query=' + id);
+  }
 
   return (
      <table >
         <thead>
           <tr>
+            <th>Selected</th>
             <th>EGA stableId</th>
             <th>Title</th>
             <th>Study type</th>
@@ -77,6 +105,7 @@ function StudyTable(props) {
         <tbody>
           {props.studies.map((study, index) => (
             <tr key={index} onClick={() => navigateTo(study.egaStableId)}>
+              <td><input type="checkbox" name="checked_studies" value={study.egaStableId} /></td>
               <td>{study.egaStableId}</td>
               <td>{study.title}</td>
               <td>{study.studyType}</td>
@@ -159,6 +188,7 @@ class Step2 extends React.Component {
           <div className="pam-flexible">
             <StudyTable studies={studies} />
           </div>
+          <GotoStep3Button />
         </div>
       );
     }
