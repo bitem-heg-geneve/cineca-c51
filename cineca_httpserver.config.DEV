@@ -5,3 +5,7 @@
 EGA_STUDIES.protocol=https
 EGA_STUDIES.server=denver.text-analytics.ch
 EGA_STUDIES.baseurl=/local/ega_studies/
+
+EGA_STUDY_DATASETS.protocol=https
+EGA_STUDY_DATASETS.server=ega-archive.org
+EGA_STUDY_DATASETS.baseurl=/metadata/v2/datasets?queryBy=study&limit=0&queryId=

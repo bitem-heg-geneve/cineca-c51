@@ -77,7 +77,6 @@ class GP(BaseHTTPRequestHandler):
                 # connection = http.client.HTTPConnection("localhost:9200") # localhost = denver
                 connection = self.get_remote_connection('EGA_STUDIES')
                 url = self.get_remote_baseurl('EGA_STUDIES') + self.path[32:]
-
                 log_it('PROXY', url)
                 connection.request("GET", url)
                 response = connection.getresponse()
@@ -98,6 +97,43 @@ class GP(BaseHTTPRequestHandler):
                 self.sendJsonResponse(response, 200)
                 return
 
+            elif self.path[0:41]=='/bitem/cineca/proxy/ega_datasets?studies=':
+                # we get local copy of Studies
+                # for each study we get its list of datasets from ega
+                studies = list()
+                std_list = self.path[41:].split(",")
+                for std_id in std_list:
+                    print("std_id", std_id);
+                    connection = self.get_remote_connection('EGA_STUDIES')
+                    url = self.get_remote_baseurl('EGA_STUDIES') + '_search?size=1&q=' + std_id
+                    log_it('PROXY', url)
+                    connection.request("GET", url)
+                    response = connection.getresponse()
+                    data = response.read().decode("utf-8")
+                    obj = json.loads(data)
+                    if obj["hits"] and obj["hits"]["hits"] and obj["hits"]["hits"][0]:
+                        hit = obj["hits"]["hits"][0]
+                        study = hit["_source"]
+                        study["id"] = std_id
+
+                        connection = self.get_remote_connection('EGA_STUDY_DATASETS')
+                        url = self.get_remote_baseurl('EGA_STUDY_DATASETS') + std_id
+                        log_it('PROXY', url)
+                        connection.request("GET", url)
+                        response = connection.getresponse()
+                        data = response.read().decode("utf-8")
+                        obj = json.loads(data)
+                        if obj["response"] and obj["response"]["result"]:
+                            study["datasets"] = obj["response"]["result"]
+                        else:
+                            study["error"] = "datasets not found"
+                    else:
+                        study = {"id": std_id, "error": "study not found"}
+                    studies.append(study)
+
+                response = self.buildSuccessResponseObject(self.path, studies)
+                self.sendJsonResponse(response, 200)
+                return
 
             elif self.path[0:25]=='/bitem/cineca/proxy/fake/':
                 fname = self.path[25:]
@@ -146,7 +182,9 @@ def get_properties():
         if '=' in line:
             nv = line.split('=')
             name = nv[0].strip()
-            value = nv[1].strip()
+            # the value may contain "=" as well
+            value = '='.join(nv[1:])
+            value = value.strip()
             props[name]=value
     f_in.close()
     return props
@@ -175,7 +213,7 @@ if __name__ == '__main__':
     log_it('base_dir', base_dir)
     properties = get_properties()
     for k in properties: log_it('property', k, '=', properties[k])
-
-    sys.stdout = open('cineca_python_proxy.log', 'w')
-    sys.stderr = open('cineca_python_proxy.err', 'w')
+    if env == "PROD":
+        sys.stdout = open('cineca_python_proxy.log', 'w')
+        sys.stderr = open('cineca_python_proxy.err', 'w')
     run(host=args.server, port=args.port, env=args.env)
