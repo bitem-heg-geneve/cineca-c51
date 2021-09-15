@@ -10,7 +10,7 @@ function App(props) {
 
   return (
     <BrowserRouter basename={process.env.REACT_APP_MYBASENAME}>
-      <div className="pam-wrapper">
+      <form className="pam-wrapper">
         <header className="pam-header">React SPA Demonstrator for Cineca Use Case 5.1</header>
         <nav className="pam-nav">
         <NavLink className="pam-link" activeClassName="pam-link-current" to="/home">Home</NavLink>&nbsp;
@@ -38,7 +38,7 @@ function App(props) {
           node_env: {process.env.NODE_ENV} -
           basename: {process.env.REACT_APP_MYBASENAME}
         </footer>
-      </div>
+      </form>
     </BrowserRouter>
   );
 }

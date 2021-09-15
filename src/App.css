@@ -3,6 +3,7 @@ body {
 
 table {
   border-collapse: collapse;
+  width:100%;
 }
 
 td, th {
@@ -29,6 +30,25 @@ th {
   text-align: left;
   background-color: #65cdff;
   white-space: nowrap;
+  xcolor: blue;
+  font-weight: 500;
+
+}
+
+.pam-table-title {
+    color: blue;
+    font-size: large;
+    font-weight: 300;
+    white-space: normal;
+}
+
+.pam-error {
+  font-size: small;
+  padding-left:8px;
+}
+
+.pam-study-spacer {
+  height:20px;
 }
 
 .pam-wrapper {
@@ -43,6 +63,9 @@ th {
   display:none;
 }
 
+h3 {
+  padding-left:8px;
+}
 .toto {
   color: #000088;
   background-color:#ff00ff;
@@ -106,7 +129,7 @@ th {
 }
 
 .pam-query-string {
-  font-size: smaller;
+  font-size: x-small;
   font-weight: normal;
 }
 
@@ -122,13 +145,16 @@ th {
 
 }
 
-.pam-fit-content {
+
+.pam-action-button {
   width: fit-content;
+  align-self: end;
 }
 
 .tooltip {
   position: relative;
 }
+
 
 .tooltip .tooltiptext {
   border-color: #cccccc;

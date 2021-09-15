@@ -77,25 +77,23 @@ function GotoStep3Button(props) {
   }
 
   return (
-   <Button className="pam-fit-content" type="button" onClick={navigateTo} appearance="primary" fontSize={'16px'} padding={'10px'} >Expand / Details</Button>
+   <Button className="pam-action-button" type="submit" onClick={navigateTo} appearance="primary" fontSize={'16px'} padding={'10px'} >Expand / Details</Button>
   );
 }
 
+function replace_underscore(str) {
+  if (str) return str.replaceAll("_", " ");
+  return "";
+}
 
 function StudyTable(props) {
-
-  const history = useHistory();
-  function navigateTo(id) {
-    // disabled: we need multiple row selection
-    //history.push('/Step3?query=' + id);
-  }
 
   return (
      <table >
         <thead>
           <tr>
             <th>Selected</th>
-            <th>EGA stableId</th>
+            <th>Study id</th>
             <th>Title</th>
             <th>Study type</th>
             <th>Description</th>
@@ -104,10 +102,10 @@ function StudyTable(props) {
         </thead>
         <tbody>
           {props.studies.map((study, index) => (
-            <tr key={index} onClick={() => navigateTo(study.egaStableId)}>
+            <tr key={index} >
               <td><input type="checkbox" name="checked_studies" value={study.egaStableId} /></td>
               <td>{study.egaStableId}</td>
-              <td>{study.title}</td>
+              <td>{replace_underscore(study.title)}</td>
               <td>{study.studyType}</td>
               <td><BigHtmlDiv content={study.description} maxlng="200"></BigHtmlDiv></td>
               <td><BigTextDiv content={study.studyAbstract} maxlng="200"></BigTextDiv></td>

@@ -8,7 +8,7 @@ function GotoStep2Button(props) {
   const history = useHistory();
   const navigateTo = () => history.push('/Step2?query=' + props.query);
   return (
-   <Button type="button" onClick={navigateTo} appearance="primary" fontSize={'16px'} padding={'10px'} >Search</Button>
+   <Button type="submit" onClick={navigateTo} appearance="primary" fontSize={'16px'} padding={'10px'} >Search</Button>
   );
 }
 
@@ -31,11 +31,9 @@ class Step1 extends React.Component {
       <div>
         <h3>Step1 - Search studies</h3>
         <p className="pam-debug">State query is: {this.state.query}</p>
-        <form>
         <SearchInput placeholder="Enter your query..." width="300px" value={this.state.query} onChange={this.handleChange} />
         <br />
         <GotoStep2Button query={this.state.query} />
-        </form>
       </div>
     );
   }

@@ -126,6 +126,7 @@ class GP(BaseHTTPRequestHandler):
                         if obj["response"] and obj["response"]["result"]:
                             study["datasets"] = obj["response"]["result"]
                         else:
+                            study["datasets"] = []
                             study["error"] = "datasets not found"
                     else:
                         study = {"id": std_id, "error": "study not found"}
