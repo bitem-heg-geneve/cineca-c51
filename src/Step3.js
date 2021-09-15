@@ -156,10 +156,9 @@ class Step3 extends React.Component {
   }
 
   _loadAsyncData(query) {
-    // example: query=EGAS00001003889
-    // TODO?: use proxy python rather than direct access to ega-archive
-    //let url = 'https://ega-archive.org/metadata/v2/datasets?queryBy=study&queryId=' + query + '&limit=0';
-    let url = 'http://localhost:8088/bitem/cineca/proxy/ega_datasets?studies=' + query
+    //let url = 'http://localhost:8088/bitem/cineca/proxy/ega_datasets?studies=' + query
+    let url = 'https://denver.text-analytics.ch/bitem/cineca/proxy/ega_datasets?studies=' + query;
+
 
     fetch(url)
       .then(this.handleFetchError)
