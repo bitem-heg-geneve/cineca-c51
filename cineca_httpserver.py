@@ -97,6 +97,21 @@ class GP(BaseHTTPRequestHandler):
                 self.sendJsonResponse(response, 200)
                 return
 
+            elif selt.path[0:60]=='/bitem/cineca/proxy/synvar/generate/litterature/fromMutation':
+                # '/synvar/generate/litterature/fromMutation'
+                    connection = self.get_remote_connection('EXPANSION_VARIANTS')
+                    url = self.get_remote_baseurl('EXPANSION_VARIANTS')
+                    # replace %gene and %variants with query values
+                    log_it('PROXY', url)
+                    connection.request("GET", url)
+                    response = connection.getresponse()
+                    data = response.read().decode("utf-8")
+                    obj = json.loads(data)
+                    response = self.buildSuccessResponseObject(self.path, obj)
+                    self.sendJsonResponse(response, 200)
+                    return
+
+
             elif self.path[0:41]=='/bitem/cineca/proxy/ega_datasets?studies=':
                 # we get local copy of Studies
                 # for each study we get its list of datasets from ega
