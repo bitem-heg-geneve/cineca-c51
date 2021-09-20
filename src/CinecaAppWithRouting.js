@@ -34,7 +34,7 @@ function App(props) {
         </Switch>
         </main>
         <footer className="pam-footer">
-          BiTeM group - March 2021 -
+          <a href="https://www.sib.swiss/patrick-ruch-group">BiTeM group</a> - September 2021 - <a href="https://github.com/bitem-heg-geneve/cineca-c51">Source</a> -
           node_env: {process.env.NODE_ENV} -
           basename: {process.env.REACT_APP_MYBASENAME}
         </footer>
@@ -44,7 +44,12 @@ function App(props) {
 }
 
 function Home() {
-  return ( <div><h2>Home</h2>Some comments explaining the demontrator purpose and services called</div> );
+	return (
+		<div>
+			<h2>Home</h2>
+			<p>T5.1 aims at investigating how information about biospecimens can be used to generate scientific hypotheses. For example, is folate differentially expressed in blood samples of rheumatoid arthritis compared to other immune diseases, are results affected by the pre-analytical conditions, are there readily available and adapted samples for the experimental validation of the data analysis findings? Specific structured query templates will be defined to leverage the linking between bio-samples and analytical features. For example, duration between sample collection and storage; gene or gene product expression networks, laboratory analysis, etc, to support a panel of advanced representations and visualisation artefacts (e.g. regression, clustering, etc) based on the population described in each dataset.</p>
+		</div>
+	);
 }
 
 function Step4() {
