@@ -97,20 +97,35 @@ class GP(BaseHTTPRequestHandler):
                 self.sendJsonResponse(response, 200)
                 return
 
-            elif selt.path[0:60]=='/bitem/cineca/proxy/synvar/generate/litterature/fromMutation':
+            elif self.path[0:60]=='/bitem/cineca/proxy/synvar/generate/litterature/fromMutation':
                 # '/synvar/generate/litterature/fromMutation'
-                    connection = self.get_remote_connection('EXPANSION_VARIANTS')
-                    url = self.get_remote_baseurl('EXPANSION_VARIANTS')
-                    # replace %gene and %variants with query values
-                    log_it('PROXY', url)
-                    connection.request("GET", url)
-                    response = connection.getresponse()
-                    data = response.read().decode("utf-8")
-                    obj = json.loads(data)
-                    response = self.buildSuccessResponseObject(self.path, obj)
-                    self.sendJsonResponse(response, 200)
-                    return
+                connection = self.get_remote_connection('EXPANSION_VARIANTS')
+                url = self.get_remote_baseurl('EXPANSION_VARIANTS')
+                # replace %gene and %variants with query values
+                log_it('PROXY', url)
+                connection.request("GET", url)
+                response = connection.getresponse()
+                data = response.read().decode("utf-8")
+                obj = json.loads(data)
+                response = self.buildSuccessResponseObject(self.path, obj)
+                self.sendJsonResponse(response, 200)
+                return
 
+            elif self.path[0:71]=='/bitem/cineca/proxy/catalogue_explorer/VerticalExpansionMesh/?keywords=':
+                # '/catalogue_explorer/VerticalExpansionMesh/'
+                keywords = self.path[71:]
+                print("keywords: ", keywords)
+                connection = self.get_remote_connection('EXPANSION_VERTICAL_MESH')
+                url = self.get_remote_baseurl('EXPANSION_VERTICAL_MESH') + keywords
+                log_it('PROXY', url)
+                connection.request("GET", url)
+                response = connection.getresponse()
+                print("Status {} and reason {}".format(response.status, response.reason))
+                data = response.read().decode("utf-8")
+                obj = json.loads(data)
+                response = self.buildSuccessResponseObject(self.path, obj)
+                self.sendJsonResponse(response, 200)
+                return
 
             elif self.path[0:41]=='/bitem/cineca/proxy/ega_datasets?studies=':
                 # we get local copy of Studies
@@ -118,7 +133,7 @@ class GP(BaseHTTPRequestHandler):
                 studies = list()
                 std_list = self.path[41:].split(",")
                 for std_id in std_list:
-                    print("std_id", std_id);
+                    print("std_id: ", std_id);
                     connection = self.get_remote_connection('EGA_STUDIES')
                     url = self.get_remote_baseurl('EGA_STUDIES') + '_search?size=1&q=' + std_id
                     log_it('PROXY', url)
