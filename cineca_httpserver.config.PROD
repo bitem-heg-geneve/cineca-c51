@@ -13,5 +13,9 @@ EGA_STUDY_DATASETS.server=ega-archive.org
 EGA_STUDY_DATASETS.baseurl=/metadata/v2/datasets?queryBy=study&limit=0&queryId=
 
 EXPANSION_VARIANTS.protocol=http
-EXPANSION_VARIANTS.goldorak.hesge.ch
+EXPANSION_VARIANTS.server=goldorak.hesge.ch
 EXPANSION_VARIANTS.baseurl=/synvar/generate/litterature/fromMutation?variant=%variants&ref=%gene&level=protein&iso=true&format=beacon
+
+EXPANSION_VERTICAL_MESH.protocol=http
+EXPANSION_VERTICAL_MESH.server=goldorak.hesge.ch:8890
+EXPANSION_VERTICAL_MESH.baseurl=/catalogue_explorer/VerticalExpansionMesh/?keywords=
