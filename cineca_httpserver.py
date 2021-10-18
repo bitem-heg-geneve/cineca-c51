@@ -97,7 +97,7 @@ class GP(BaseHTTPRequestHandler):
                 self.sendJsonResponse(response, 200)
                 return
 
-            elif selt.path[0:60]=='/bitem/cineca/proxy/synvar/generate/litterature/fromMutation':
+            elif self.path[0:60]=='/bitem/cineca/proxy/synvar/generate/litterature/fromMutation':
                 # '/synvar/generate/litterature/fromMutation'
                     connection = self.get_remote_connection('EXPANSION_VARIANTS')
                     url = self.get_remote_baseurl('EXPANSION_VARIANTS')
@@ -148,6 +148,14 @@ class GP(BaseHTTPRequestHandler):
                     studies.append(study)
 
                 response = self.buildSuccessResponseObject(self.path, studies)
+                self.sendJsonResponse(response, 200)
+                return
+
+            elif self.path[0:21]=='/bitem/cineca/detail/':
+                tail = self.path[21:]
+                data = list()
+                for ch in tail: data.append({"ch": ch, "ord": ord(ch)})
+                response = self.buildSuccessResponseObject(self.path, data)
                 self.sendJsonResponse(response, 200)
                 return
 
