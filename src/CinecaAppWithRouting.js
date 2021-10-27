@@ -3,6 +3,8 @@ import React from 'react';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
+import Step4 from './Step4';
+import StepTest from './StepTest';
 import { BrowserRouter, Switch, Route, Link, NavLink , Redirect } from "react-router-dom";
 
 
@@ -19,6 +21,7 @@ function App(props) {
           <NavLink className="pam-link" activeClassName="pam-link-current" to="/step2">Step2</NavLink>&nbsp;
           <NavLink className="pam-link" activeClassName="pam-link-current" to="/step3">Step3</NavLink>&nbsp;
           <NavLink className="pam-link" activeClassName="pam-link-current" to="/step4">Step4</NavLink>&nbsp;
+          <NavLink className="pam-link" activeClassName="pam-link-current" to="/step5">StepTest</NavLink>&nbsp;
           <NavLink className="pam-link-disabled"  to="#">Step5</NavLink>&nbsp;
         </nav>
         <main className="pam-main pam-flex-wrapper">
@@ -29,7 +32,7 @@ function App(props) {
           <Route path="/step2" component={Step2} />
           <Route path="/step3" component={Step3} />
           <Route path="/step4" component={Step4} />
-          <Route path="/step5" component={Step5} />
+          <Route path="/step5" component={StepTest} />
           <Route><NoMatch /></Route>
         </Switch>
         </main>
@@ -52,12 +55,6 @@ function Home() {
 	);
 }
 
-function Step4() {
-  return <h2>Step4</h2>;
-}
-function Step5() {
-  return <h2>Step5</h2>;
-}
 function NoMatch() {
   return <h2>Unknown page</h2>;
 }

@@ -7,6 +7,8 @@ from ftplib import FTP
 import http.client
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import datetime
+import traceback
+import random
 
 
 class GP(BaseHTTPRequestHandler):
@@ -59,6 +61,15 @@ class GP(BaseHTTPRequestHandler):
 
     def get_remote_baseurl(self, service):
         return properties[service + '.baseurl']
+
+    def get_param(self, name):
+        params = self.path.split("?")
+        if len(params)==1: return ""
+        kv_list = params[1].split("&")
+        for kv in kv_list:
+            arr = kv.split("=")
+            if arr[0]==name and len(arr)>1: return arr[1]
+        return ""
 
     def do_GET(self):
 
@@ -174,6 +185,56 @@ class GP(BaseHTTPRequestHandler):
                 self.sendJsonResponse(response, 200)
                 return
 
+
+            elif self.path[0:28]=='/bitem/cineca/proxy/cohorts/':
+                connection = self.get_remote_connection('COHORT_SEARCH')
+                url = self.get_remote_baseurl('COHORT_SEARCH') + '_search?q='
+                params = list()
+                p = self.get_param('disease')
+                if p != '': params.append(p)
+                p = self.get_param('variants')
+                if p != '': params.append(p)
+                p = self.get_param('other')
+                if p != '': params.append(p)
+                url += "%20AND%20".join(params)
+                connection.request("GET", url)
+                response = connection.getresponse()
+                log_it('PROXY', url)
+                data = response.read().decode("utf-8")
+                obj = json.loads(data)
+                hits = list()
+                if obj.get("hits") and obj["hits"].get("hits"):
+                    for hit in obj["hits"]["hits"]: hits.append(hit)
+                modify_hits(hits)
+                response = self.buildSuccessResponseObject(self.path, hits)
+                self.sendJsonResponse(response, 200)
+                return
+
+            elif self.path[0:41]=='/bitem/cineca/proxy/fake_bq_global_result':
+                nf = open("data/fake_bq_global_result.json", 'r')
+                data = nf.read()
+                nf.close()
+                obj = json.loads(data)
+                response = self.buildSuccessResponseObject(self.path, obj["data"])
+                self.sendJsonResponse(response, 200)
+                return
+
+            elif self.path[0:52]=='/bitem/cineca/proxy/fake_bq_detailed_result?sources=':
+                nf = open("data/fake_bq_detailed_result.json", 'r')
+                data = nf.read()
+                nf.close()
+                obj = json.loads(data)
+                sources = self.path[52:]
+                all_data = obj["data"];
+                data = []
+                for el in all_data:
+                    if el["source"] in sources:
+                        data.append(el)
+                response = self.buildSuccessResponseObject(self.path, data);
+                self.sendJsonResponse(response, 200)
+                return
+
+
             elif self.path[0:25]=='/bitem/cineca/proxy/fake/':
                 fname = self.path[25:]
                 fullname = base_dir + fname
@@ -199,11 +260,18 @@ class GP(BaseHTTPRequestHandler):
                 return
 
         except:
+            traceback.print_exc()
             error_msg = str(sys.exc_info()[1])
 
         log_it(error_msg)
         obj = self.buildErrorResponseObject(self.path, error_msg)
         self.sendJsonResponse(obj,400)
+
+# temp function to simulate multi-cohort data
+def modify_hits(hits):
+    datasets = ["COLAUS", "UK", "Child", "Africa"]
+    for hit in hits:
+        hit["dataset"] = datasets[random.randrange(0,4)]
 
 
 def log_it(*things):

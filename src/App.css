@@ -47,6 +47,12 @@ th {
   padding-left:8px;
 }
 
+.pam-padding {
+  padding-left:8px;
+  padding-right:8px;
+
+}
+
 .pam-study-spacer {
   height:20px;
 }
@@ -60,7 +66,8 @@ th {
 
 .pam-debug {
   font-size: 8px;
-  display:none;
+  padding-left:8px;
+  #display:none;
 }
 
 h3 {
@@ -140,11 +147,29 @@ h3 {
 }
 
 .pam-flexible {
-  flex-grow: 1; overflow-y: scroll;
+  flex-grow: 1;
+  overflow-y: scroll;
   min-height:0;
-
 }
 
+.pam-bar-container {
+  display: flex; flex-direction: row; min-width: 0;
+  max-height:100%;
+  flex-grow: 1;
+}
+
+.pam-border { border-style: solid; }
+
+.pam-gender-bar { max-height:100%; max-width:19%; border-style: solid; border-width: 1px; padding: 4px;}
+.pam-age-bar    { max-height:100%; max-width:19%; border-style: solid; border-width: 1px; padding: 4px;}
+.pam-weight-bar { max-height:100%; max-width:19%; border-style: solid; border-width: 1px; padding: 4px;}
+
+.pam-flex-x-container { display: flex; flex-direction: row;    min-width:  0; }
+.pam-flex-y-container { display: flex; flex-direction: column; min-height: 0; }
+.pam-flex-x-content   { flex-grow: 1; overflow-x: auto; min-width: 0; }
+.pam-flex-y-content   { flex-grow: 1; overflow-y: auto; min-height:0; }
+
+.pam-padding-bottom { padding-bottom: 4px; }
 
 .pam-action-button {
   width: fit-content;

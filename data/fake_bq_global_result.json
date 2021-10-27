@@ -1,0 +1,21 @@
+{
+  "data": [{
+    "source" : "Africa",
+    "sampleMatches" : 32,
+    "sampleCount" : 112
+    },{
+    "source" : "Colaus",
+    "sampleMatches" : 108,
+    "sampleCount" : 738
+    },{
+    "source" : "Child",
+    "sampleMatches" : 0,
+    "sampleCount" : 199
+    },{
+    "source" : "UK",
+    "sampleMatches" : 317,
+    "sampleCount" : 699
+      }],
+  "query": "/bitem/cineca/proxy/bq_global_result/_search?q=cancer",
+  "success": true
+}

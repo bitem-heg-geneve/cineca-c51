@@ -1,0 +1,33 @@
+<html>
+  <head><style>
+    header { padding:5px; background-color:grey;}
+    nav    { padding:5px; background-color:lightgrey;}
+    main   { padding:5px; background-color:grey;}
+    footer { padding:5px; background-color:lightgrey;}
+    div    { padding:5px; border-style: solid; border-width: 1px; margin: 2px;}
+    .full-screen     { position: absolute; top:0; bottom:0; left:0; right:0; }
+    .flex-y-container { display: flex; flex-direction: column; min-height: 0; }
+    .flex-y-content   { flex-grow: 1;   overflow-y: scroll; min-height:0; }
+    .flex-x-container { display: flex; flex-direction: row; min-width: 0; }
+    .flex-x-content   { flex-grow: 1;   overflow-x: scroll; min-width:0; }
+
+  </style></head>
+  <body class="full-screen flex-y-container">
+    <header>header</header>
+    <nav>nav</nav>
+    <main class="flex-y-container flex-y-content">
+      <div>div1</div>
+      <div class="flex-y-container flex-y-content">
+        <div class="flex-y-content">div11</div>
+        <div class="flex-x-container flex-y-content">
+          <div>121</div>
+          <div class="flex-x-content">122</div>
+          <div>123</div>
+        </div>
+        <div>div13</div>
+      </div>
+      <div>div3</div>
+    </main>
+    <footer>footer</footer>
+  </body>
+</html>

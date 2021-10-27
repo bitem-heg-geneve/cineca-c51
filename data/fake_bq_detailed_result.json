@@ -1,0 +1,75 @@
+{
+  "data": [{
+    "source" : "Africa",
+    "sampleId" : "3235",
+    "age": 39,
+    "gender": "Male",
+    "somethingElse" : "Medium"
+  },{
+    "source" : "Africa",
+    "sampleId" : "3236",
+    "age": 22,
+    "gender": "Female",
+    "somethingElse" : "Medium"
+  },{
+    "source" : "Africa",
+    "sampleId" : "3237",
+    "age": 44,
+    "gender": "Male",
+    "somethingElse" : "High"
+  },{
+    "source" : "Africa",
+    "sampleId" : "3238",
+    "age": 36,
+    "gender": "Female",
+    "somethingElse" : "Low"
+
+  },{
+    "source" : "Colaus",
+    "sampleId" : "23238",
+    "age": 19,
+    "gender": "NA",
+    "somethingElse" : "Low"
+  },{
+    "source" : "Colaus",
+    "sampleId" : "23238",
+    "age": 61,
+    "gender": "Female",
+    "somethingElse" : "High"
+  },{
+    "source" : "Colaus",
+    "sampleId" : "23238",
+    "age": 31,
+    "gender": "Male",
+    "somethingElse" : "Low"
+
+
+  },{
+    "source" : "UK",
+    "sampleId" : "33238",
+    "age": 90,
+    "gender": "Female",
+    "somethingElse" : "Low"
+  },{
+    "source" : "UK",
+    "sampleId" : "33238",
+    "age": 44,
+    "gender": "Female",
+    "somethingElse" : "Medium"
+  },{
+    "source" : "UK",
+    "sampleId" : "33238",
+    "age": 41,
+    "gender": "Female",
+    "somethingElse" : "Medium"
+  },{
+    "source" : "UK",
+    "sampleId" : "33238",
+    "age": 40,
+    "gender": "Unknown",
+    "somethingElse" : "Low"
+
+    }],
+  "query": "/bitem/cineca/proxy/bq_detailed_result/_search?q=cancer",
+  "success": true
+}
