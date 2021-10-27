@@ -19,3 +19,7 @@ EXPANSION_VARIANTS.baseurl=/synvar/generate/litterature/fromMutation?variant=%va
 EXPANSION_VERTICAL_MESH.protocol=http
 EXPANSION_VERTICAL_MESH.server=goldorak.hesge.ch:8890
 EXPANSION_VERTICAL_MESH.baseurl=/catalogue_explorer/VerticalExpansionMesh/?keywords=
+
+COHORT_SEARCH.protocol=http
+COHORT_SEARCH.server=localhost:9200
+COHORT_SEARCH.baseurl=/cineca_synthetic_cohorts_sample/
