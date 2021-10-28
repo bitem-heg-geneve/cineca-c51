@@ -32,7 +32,7 @@ function GlobalResult(props) {
     params += "disease=" + encodeURI(props.criteria.disease) + "&"
     params += "variants=" + encodeURI(props.criteria.variants) + "&"
     params += "other=" + encodeURI(props.criteria.other)
-    var url = 'http://localhost:8088/bitem/cineca/proxy/cohorts/_search?' + params;
+    var url = 'https://denver.text-analytics.ch/bitem/cineca/proxy/cohorts/_search?' + params;
     return fetch(url).then(resp => resp.json())
   }
 
