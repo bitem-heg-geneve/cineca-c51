@@ -122,6 +122,22 @@ class GP(BaseHTTPRequestHandler):
                 self.sendJsonResponse(response, 200)
                 return
 
+			elif self.path[0:69]=='/bitem/cineca/proxy/catalogue_explorer/DatadrivenExpansion/?keywords=':
+                # '/catalogue_explorer/DatadrivenExpansion/'
+                keywords = self.path[69:]
+                print("keywords: ", keywords)
+                connection = self.get_remote_connection('EXPANSION_DATADRIVEN')
+                url = self.get_remote_baseurl('EXPANSION_DATADRIVEN') + keywords
+                log_it('PROXY', url)
+                connection.request("GET", url)
+                response = connection.getresponse()
+                print("Status {} and reason {}".format(response.status, response.reason))
+                data = response.read().decode("utf-8")
+                obj = json.loads(data)
+                response = self.buildSuccessResponseObject(self.path, obj)
+                self.sendJsonResponse(response, 200)
+                return
+
             elif self.path[0:71]=='/bitem/cineca/proxy/catalogue_explorer/VerticalExpansionMesh/?keywords=':
                 # '/catalogue_explorer/VerticalExpansionMesh/'
                 keywords = self.path[71:]
@@ -188,7 +204,7 @@ class GP(BaseHTTPRequestHandler):
 
             elif self.path[0:28]=='/bitem/cineca/proxy/cohorts/':
                 connection = self.get_remote_connection('COHORT_SEARCH')
-                url = self.get_remote_baseurl('COHORT_SEARCH') + '_search?q='
+                url = self.get_remote_baseurl('COHORT_SEARCH') + '_search?size=10000q='
                 params = list()
                 p = self.get_param('disease')
                 if p != '': params.append(p)
