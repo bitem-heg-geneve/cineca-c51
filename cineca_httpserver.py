@@ -122,7 +122,7 @@ class GP(BaseHTTPRequestHandler):
                 self.sendJsonResponse(response, 200)
                 return
 
-			elif self.path[0:69]=='/bitem/cineca/proxy/catalogue_explorer/DatadrivenExpansion/?keywords=':
+            elif self.path[0:69]=='/bitem/cineca/proxy/catalogue_explorer/DatadrivenExpansion/?keywords=':
                 # '/catalogue_explorer/DatadrivenExpansion/'
                 keywords = self.path[69:]
                 print("keywords: ", keywords)
@@ -221,7 +221,7 @@ class GP(BaseHTTPRequestHandler):
                 hits = list()
                 if obj.get("hits") and obj["hits"].get("hits"):
                     for hit in obj["hits"]["hits"]: hits.append(hit)
-                modify_hits(hits)
+                #modify_hits(hits)
                 response = self.buildSuccessResponseObject(self.path, hits)
                 self.sendJsonResponse(response, 200)
                 return
