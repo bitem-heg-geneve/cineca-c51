@@ -204,7 +204,8 @@ class GP(BaseHTTPRequestHandler):
 
             elif self.path[0:28]=='/bitem/cineca/proxy/cohorts/':
                 connection = self.get_remote_connection('COHORT_SEARCH')
-                url = self.get_remote_baseurl('COHORT_SEARCH') + '_search?size=10000&q='
+                fields_of_interest = "dataset,norm_ID,norm_cancer,norm_diabetes,norm_hypertension,norm_age,norm_gender,norm_height,norm_variant_gene,norm_variant_HGVS,norm_weight"
+                url = self.get_remote_baseurl('COHORT_SEARCH') + '_search?size=10000&_source=' + fields_of_interest + '&q='
                 params = list()
                 p = self.get_param('disease')
                 if p != '': params.append(p)
