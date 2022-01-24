@@ -6,17 +6,8 @@ import YesNoUnknownChart from './YesNoUnknownChart';
 import React, { useState, useEffect } from 'react';
 import { Button, SearchInput } from 'evergreen-ui';
 import { useHistory } from 'react-router-dom';
+import { getUrlParam} from "./utils";
 
-function getUrlParam(name) {
-  let params = window.location.search;
-  if (params.startsWith("?")) params=params.substr(1);
-  let nvlist = params.split("&");
-  for (var i=0; i<nvlist.length; i++) {
-    let nv = nvlist[i].split("=");
-    if (nv[0]==name && nv.length==2) return nv[1];
-  }
-  return "";
-}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - -
 function GlobalResult(props) {
@@ -145,10 +136,11 @@ function Step4(props) {
 
   return (
     <div className="pam-flex-y-content pam-flex-y-container">
-      <h3>Step4 - Beacon data</h3>
+      <h3>Beacon explorer</h3>
+      <div className="pam-padding pam-padding-bottom">Selected datasets: {getUrlParam("query")}</div>
       <div className="pam-padding">
         <SearchInput name="disease" placeholder="Disease..." width="300px" value={criteria.disease} onChange={handleChange} />&nbsp;
-        <SearchInput name="variants" placeholder="Variants..." width="300px" value={criteria.variants} onChange={handleChange} />&nbsp;
+        <SearchInput name="variants" placeholder="Variants i.e. BRAF V600E" width="300px" value={criteria.variants} onChange={handleChange} />&nbsp;
         <SearchInput name="other" placeholder="Other..." width="300px" value={criteria.other} onChange={handleChange} />&nbsp;
         <Button type="submit" onClick={handleGetStats} appearance="primary" fontSize={'16px'} padding={'10px'} >Get stats</Button>
       </div>

@@ -1,0 +1,30 @@
+{
+  "data": [{
+      "id" : "GECKO_0000060",
+      "geckoLabel" : "gender",
+      "geckoDescr" : "An organismal quality inhering in a bearer by virtue of the bearer's preference towards a range of characteristics pertaining to, and differentiating between, masculinity and femininity.",
+      "searchFieldName" : "Sex"
+    },{
+      "id" : "PATO_0000011",
+      "geckoLabel" : "age",
+      "geckoDescr" : "A time quality inhering in a bearer by virtue of how long the bearer has existed.",
+      "searchFieldName" : "Age"
+    },{
+      "id" : "CMO_0000012",
+      "geckoLabel" : "weight",
+      "geckoDescr" : "body weight data item.",
+      "searchFieldName" : "Weight"
+      },{
+        "id" : "GECKO_0000106",
+        "geckoLabel" : "sample size",
+        "geckoDescr" : "A count which represents the subset of a collection chosen for an investigation, survey, or assay.",
+        "searchFieldName" : "SampleSize"
+    },{
+      "id" : "MONDO_0004992",
+      "geckoLabel" : "cancer",
+      "geckoDescr" : "A tumor composed of atypical neoplastic, often pleomorphic cells that invade other tissues. Malignant neoplasms often metastasize to distant anatomic sites and may recur after excision. The most common malignant neoplasms are carcinomas (adenocarcinomas or squamous cell carcinomas), Hodgkin and non-Hodgkin lymphomas, leukemias, melanomas, and sarcomas.",
+      "searchFieldName" : "Cancer"
+      }],
+  "query": "/bitem/cineca/proxy/fake_stat_fields.json",
+  "success": true
+}

@@ -210,6 +210,15 @@ class GP(BaseHTTPRequestHandler):
                 self.sendJsonResponse(response, 200)
                 return
 
+            elif self.path[0:41]=='/bitem/cineca/proxy/fake_stat_fields':
+                nf = open("data/fake_stat_fields.json", 'r')
+                data = nf.read()
+                nf.close()
+                obj = json.loads(data)
+                response = self.buildSuccessResponseObject(self.path, obj["data"])
+                self.sendJsonResponse(response, 200)
+                return
+
             elif self.path[0:41]=='/bitem/cineca/proxy/fake_bq_global_result':
                 nf = open("data/fake_bq_global_result.json", 'r')
                 data = nf.read()

@@ -1,8 +1,8 @@
 import './App.css';
 import React from 'react';
 import { useHistory } from "react-router-dom";
-import { Button } from 'evergreen-ui'
-
+import { Button } from 'evergreen-ui';
+import { getUrlParam} from "./utils";
 
 
 function shorten(txt, max_lng) {
@@ -10,16 +10,7 @@ function shorten(txt, max_lng) {
 }
 
 
-function getUrlParam(name) {
-  let params = window.location.search;
-  if (params.startsWith("?")) params=params.substr(1);
-  let nvlist = params.split("&");
-  for (var i=0; i<nvlist.length; i++) {
-    let nv = nvlist[i].split("=");
-    if (nv[0]==name && nv.length==2) return nv[1];
-  }
-  return "";
-}
+
 
 function Header(props) {
   return (<h3>Step3 - Datasets of selected study(ies) <span className="pam-query-string">{getUrlParam('query')}</span></h3> );
@@ -62,7 +53,7 @@ function StudyList(props) {
 }
 
 function DatasetTitleRow(props) {
-  return ( <tr><th colSpan="8" className="pam-table-title">{props.title}</th></tr> );
+  return ( <tr><th colSpan="9" className="pam-table-title">{props.title}</th></tr> );
 }
 
 function DatasetHeaderRow(props) {
@@ -73,6 +64,7 @@ function DatasetHeaderRow(props) {
           <th>Title</th>
           <th>Dataset types</th>
           <th>Description</th>
+          <th>Beacon</th>
           <th>Access type</th>
           <th>Center name</th>
           <th>Technologies</th>
@@ -105,6 +97,7 @@ function DatasetTable(props) {
                <td>{dataset.title}</td>
                <td>{dataset.datasetTypes}</td>
                <td>{dataset.description}</td>
+               <td>Yes</td>
                <td>{dataset.accessType}</td>
                <td>{dataset.centerName}</td>
                <td>{dataset.technology}</td>
