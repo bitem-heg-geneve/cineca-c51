@@ -122,6 +122,22 @@ class GP(BaseHTTPRequestHandler):
                 self.sendJsonResponse(response, 200)
                 return
 
+            elif self.path[0:69]=='/bitem/cineca/proxy/catalogue_explorer/DatadrivenExpansion/?keywords=':
+                # '/catalogue_explorer/DatadrivenExpansion/'
+                keywords = self.path[69:]
+                print("keywords: ", keywords)
+                connection = self.get_remote_connection('EXPANSION_DATADRIVEN')
+                url = self.get_remote_baseurl('EXPANSION_DATADRIVEN') + keywords
+                log_it('PROXY', url)
+                connection.request("GET", url)
+                response = connection.getresponse()
+                print("Status {} and reason {}".format(response.status, response.reason))
+                data = response.read().decode("utf-8")
+                obj = json.loads(data)
+                response = self.buildSuccessResponseObject(self.path, obj)
+                self.sendJsonResponse(response, 200)
+                return
+
             elif self.path[0:71]=='/bitem/cineca/proxy/catalogue_explorer/VerticalExpansionMesh/?keywords=':
                 # '/catalogue_explorer/VerticalExpansionMesh/'
                 keywords = self.path[71:]
@@ -188,7 +204,8 @@ class GP(BaseHTTPRequestHandler):
 
             elif self.path[0:28]=='/bitem/cineca/proxy/cohorts/':
                 connection = self.get_remote_connection('COHORT_SEARCH')
-                url = self.get_remote_baseurl('COHORT_SEARCH') + '_search?q='
+                fields_of_interest = "dataset,norm_ID,norm_cancer,norm_diabetes,norm_hypertension,norm_age,norm_gender,norm_height,norm_variant_gene,norm_variant_HGVS,norm_weight"
+                url = self.get_remote_baseurl('COHORT_SEARCH') + '_search?size=10000&_source=' + fields_of_interest + '&q='
                 params = list()
                 p = self.get_param('disease')
                 if p != '': params.append(p)
@@ -205,7 +222,7 @@ class GP(BaseHTTPRequestHandler):
                 hits = list()
                 if obj.get("hits") and obj["hits"].get("hits"):
                     for hit in obj["hits"]["hits"]: hits.append(hit)
-                modify_hits(hits)
+                #modify_hits(hits)
                 response = self.buildSuccessResponseObject(self.path, hits)
                 self.sendJsonResponse(response, 200)
                 return

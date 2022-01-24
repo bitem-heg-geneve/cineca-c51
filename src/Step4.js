@@ -31,7 +31,7 @@ function GlobalResult(props) {
     var total = 0;
     var summary = {};
     for (var i=0; i<data.length;i++) {
-      var src = data[i].dataset;
+      var src = data[i]["_source"].dataset;
       if (summary[src] == undefined) summary[src] = {source: src, sampleMatches:0, sampleCount:0};
       summary[src].sampleMatches += 1;
       total +=1;
@@ -99,7 +99,7 @@ function DetailedStats(props) {
     console.log("data.length", props.data.length);
     var filtered_data = [];
     for (var i=0; i<full_data.length;i++) {
-      var ds = full_data[i].dataset;
+      var ds = full_data[i]["_source"].dataset;
       if (props.sources[ds]) filtered_data.push(full_data[i]);
     }
     return filtered_data;
