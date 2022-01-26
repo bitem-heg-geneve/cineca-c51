@@ -4,11 +4,12 @@ import json
 import tarfile
 import argparse
 from ftplib import FTP
-import http.client
+#import http.client
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import datetime
 import traceback
 import random
+import requests
 
 
 class GP(BaseHTTPRequestHandler):
@@ -54,13 +55,25 @@ class GP(BaseHTTPRequestHandler):
     def get_remote_connection(self, service):
         protocol = properties[service + '.protocol']
         server = properties[service + '.server']
+        log_it(service + " remote connection protocol : " + protocol)
+        log_it(service + " remote connection server   : " + server)
         if (protocol == 'https'):
             return http.client.HTTPSConnection(server)
         else:
             return http.client.HTTPConnection(server)
 
-    def get_remote_baseurl(self, service):
-        return properties[service + '.baseurl']
+    def get_service_baseurl(self, service):
+        result = properties[service + '.baseurl']
+        log_it(service + " service baseurl : " + result)
+        return result
+    def get_service_user(self, service):
+        result = properties[service + '.user']
+        log_it(service + " service user : " + result)
+        return result
+    def get_service_password(self, service):
+        result = properties[service + '.password']
+        log_it(service + " service password : ***")
+        return result
 
     def get_param(self, name):
         params = self.path.split("?")
@@ -86,19 +99,18 @@ class GP(BaseHTTPRequestHandler):
                 #url = '/bitem/ega_studies/' + self.path[32:]
                 # - - - When this service is on PROD on denver server
                 # connection = http.client.HTTPConnection("localhost:9200") # localhost = denver
-                connection = self.get_remote_connection('EGA_STUDIES')
-                url = self.get_remote_baseurl('EGA_STUDIES') + self.path[32:]
-                log_it('PROXY', url)
-                connection.request("GET", url)
-                response = connection.getresponse()
-                if response.status != 200:
+                url = self.get_service_baseurl('EGA_STUDIES') + self.path[32:]
+                usr = self.get_service_user('EGA_STUDIES')
+                pwd = self.get_service_password('EGA_STUDIES')
+                basic = requests.auth.HTTPBasicAuth(usr,pwd)
+                response = requests.get(url, auth=basic)
+                if response.status_code != 200:
                     error_msg = "Remote server returned an error: " + response.reason
                     obj = self.buildErrorResponseObject(self.path, error_msg)
                     self.sendJsonResponse(obj,400)
                     return
 
-                data = response.read().decode("utf-8")
-                obj = json.loads(data)
+                obj = response.json()
                 studies = list()
                 for hit in obj["hits"]["hits"]:
                     study = hit["_source"]
@@ -110,14 +122,10 @@ class GP(BaseHTTPRequestHandler):
 
             elif self.path[0:60]=='/bitem/cineca/proxy/synvar/generate/litterature/fromMutation':
                 # '/synvar/generate/litterature/fromMutation'
-                connection = self.get_remote_connection('EXPANSION_VARIANTS')
-                url = self.get_remote_baseurl('EXPANSION_VARIANTS')
+                url = self.get_service_baseurl('EXPANSION_VARIANTS')
                 # replace %gene and %variants with query values
-                log_it('PROXY', url)
-                connection.request("GET", url)
-                response = connection.getresponse()
-                data = response.read().decode("utf-8")
-                obj = json.loads(data)
+                response = requests.get(url)
+                obj = response.json()
                 response = self.buildSuccessResponseObject(self.path, obj)
                 self.sendJsonResponse(response, 200)
                 return
@@ -126,14 +134,10 @@ class GP(BaseHTTPRequestHandler):
                 # '/catalogue_explorer/DatadrivenExpansion/'
                 keywords = self.path[69:]
                 print("keywords: ", keywords)
-                connection = self.get_remote_connection('EXPANSION_DATADRIVEN')
-                url = self.get_remote_baseurl('EXPANSION_DATADRIVEN') + keywords
-                log_it('PROXY', url)
-                connection.request("GET", url)
-                response = connection.getresponse()
-                print("Status {} and reason {}".format(response.status, response.reason))
-                data = response.read().decode("utf-8")
-                obj = json.loads(data)
+                url = self.get_service_baseurl('EXPANSION_DATADRIVEN') + keywords
+                response = requests.get(url)
+                print("Status {} and reason {}".format(response.status_code, response.reason))
+                obj = response.json()
                 response = self.buildSuccessResponseObject(self.path, obj)
                 self.sendJsonResponse(response, 200)
                 return
@@ -142,14 +146,10 @@ class GP(BaseHTTPRequestHandler):
                 # '/catalogue_explorer/VerticalExpansionMesh/'
                 keywords = self.path[71:]
                 print("keywords: ", keywords)
-                connection = self.get_remote_connection('EXPANSION_VERTICAL_MESH')
-                url = self.get_remote_baseurl('EXPANSION_VERTICAL_MESH') + keywords
-                log_it('PROXY', url)
-                connection.request("GET", url)
-                response = connection.getresponse()
-                print("Status {} and reason {}".format(response.status, response.reason))
-                data = response.read().decode("utf-8")
-                obj = json.loads(data)
+                url = self.get_service_baseurl('EXPANSION_VERTICAL_MESH') + keywords
+                response = requests.get(url)
+                print("Status {} and reason {}".format(response.status_code, response.reason))
+                obj = response.json()
                 response = self.buildSuccessResponseObject(self.path, obj)
                 self.sendJsonResponse(response, 200)
                 return
@@ -161,25 +161,19 @@ class GP(BaseHTTPRequestHandler):
                 std_list = self.path[41:].split(",")
                 for std_id in std_list:
                     print("std_id: ", std_id);
-                    connection = self.get_remote_connection('EGA_STUDIES')
-                    url = self.get_remote_baseurl('EGA_STUDIES') + '_search?size=1&q=' + std_id
-                    log_it('PROXY', url)
-                    connection.request("GET", url)
-                    response = connection.getresponse()
-                    data = response.read().decode("utf-8")
-                    obj = json.loads(data)
+                    url = self.get_service_baseurl('EGA_STUDIES') + '_search?size=1&q=' + std_id
+                    usr = self.get_service_user('EGA_STUDIES')
+                    pwd = self.get_service_password('EGA_STUDIES')
+                    basic = requests.auth.HTTPBasicAuth(usr,pwd)
+                    response = requests.get(url, auth=basic)
+                    obj = response.json()
                     if obj["hits"] and obj["hits"]["hits"] and obj["hits"]["hits"][0]:
                         hit = obj["hits"]["hits"][0]
                         study = hit["_source"]
                         study["id"] = std_id
-
-                        connection = self.get_remote_connection('EGA_STUDY_DATASETS')
-                        url = self.get_remote_baseurl('EGA_STUDY_DATASETS') + std_id
-                        log_it('PROXY', url)
-                        connection.request("GET", url)
-                        response = connection.getresponse()
-                        data = response.read().decode("utf-8")
-                        obj = json.loads(data)
+                        url = self.get_service_baseurl('EGA_STUDY_DATASETS') + std_id
+                        response = requests.get(url)
+                        obj = response.json()
                         if obj["response"] and obj["response"]["result"]:
                             study["datasets"] = obj["response"]["result"]
                         else:
@@ -188,7 +182,6 @@ class GP(BaseHTTPRequestHandler):
                     else:
                         study = {"id": std_id, "error": "study not found"}
                     studies.append(study)
-
                 response = self.buildSuccessResponseObject(self.path, studies)
                 self.sendJsonResponse(response, 200)
                 return
@@ -203,9 +196,8 @@ class GP(BaseHTTPRequestHandler):
 
 
             elif self.path[0:28]=='/bitem/cineca/proxy/cohorts/':
-                connection = self.get_remote_connection('COHORT_SEARCH')
                 fields_of_interest = "dataset,norm_ID,norm_cancer,norm_diabetes,norm_hypertension,norm_age,norm_gender,norm_height,norm_variant_gene,norm_variant_HGVS,norm_weight"
-                url = self.get_remote_baseurl('COHORT_SEARCH') + '_search?size=10000&_source=' + fields_of_interest + '&q='
+                url = self.get_service_baseurl('COHORT_SEARCH') + '_search?size=10000&_source=' + fields_of_interest + '&q='
                 params = list()
                 p = self.get_param('disease')
                 if p != '': params.append(p)
@@ -214,11 +206,11 @@ class GP(BaseHTTPRequestHandler):
                 p = self.get_param('other')
                 if p != '': params.append(p)
                 url += "%20AND%20".join(params)
-                connection.request("GET", url)
-                response = connection.getresponse()
-                log_it('PROXY', url)
-                data = response.read().decode("utf-8")
-                obj = json.loads(data)
+                usr = self.get_service_user('COHORT_SEARCH')
+                pwd = self.get_service_password('COHORT_SEARCH')
+                basic = requests.auth.HTTPBasicAuth(usr,pwd)
+                response = requests.get(url, auth=basic)
+                obj = response.json()
                 hits = list()
                 if obj.get("hits") and obj["hits"].get("hits"):
                     for hit in obj["hits"]["hits"]: hits.append(hit)
@@ -304,9 +296,8 @@ def log_it(*things):
     now = datetime.datetime.now().isoformat().replace('T',' ')[:19]
     print(now, *things, flush=True)
 
-def get_properties():
-    props = dict()
-    prop_file='cineca_httpserver.config.' + env
+def add_properties(props, file_basename):
+    prop_file=  file_basename + '.' + env
     f_in = open(prop_file, 'r')
     while True:
         line = f_in.readline()
@@ -320,6 +311,11 @@ def get_properties():
             value = value.strip()
             props[name]=value
     f_in.close()
+
+def get_properties():
+    props = dict()
+    add_properties(props, 'cineca_httpserver.config')
+    add_properties(props, 'cineca_httpserver.security')
     return props
 
 def run(host, port, env):
@@ -345,7 +341,8 @@ if __name__ == '__main__':
     base_dir="./data/"
     log_it('base_dir', base_dir)
     properties = get_properties()
-    for k in properties: log_it('property', k, '=', properties[k])
+    for k in properties:
+        if not k.endswith('password'): log_it('property', k, '=', properties[k])
     if env == "PROD":
         sys.stdout = open('cineca_python_proxy.log', 'w')
         sys.stderr = open('cineca_python_proxy.err', 'w')

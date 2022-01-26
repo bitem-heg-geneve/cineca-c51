@@ -2,7 +2,8 @@ import './App.css';
 import React from 'react';
 import { useHistory } from "react-router-dom";
 import { Button } from 'evergreen-ui';
-import { getUrlParam} from "./utils";
+import { getUrlParam, isDev } from "./utils";
+
 
 
 function shorten(txt, max_lng) {
@@ -13,7 +14,7 @@ function shorten(txt, max_lng) {
 
 
 function Header(props) {
-  return (<h3>Step3 - Datasets of selected study(ies) <span className="pam-query-string">{getUrlParam('query')}</span></h3> );
+  return (<h3>Datasets of selected study(ies) <span className="pam-query-string">{getUrlParam('query')}</span></h3> );
 }
 
 function Debug(props) {
@@ -121,8 +122,10 @@ function MainContent(props) {
 function GotoStep4Button(props) {
 
   const history = useHistory();
+  const env = getUrlParam("env");
+  const env_param = env=="" ? "" : "&env=" + env;
 
-  function navigateTo(id) {
+  function navigateTo() {
     var nodes = document.getElementsByName("checked_datasets");
     console.log(nodes);
     var ds_list=[];
@@ -132,7 +135,7 @@ function GotoStep4Button(props) {
     }
     var datasets = ds_list.join(",");
     console.log("checked_datasets", datasets);
-    history.push('/Step4?query=' + datasets);
+    history.push('/Step4?query=' + datasets + env_param);
   }
 
   return (
@@ -151,6 +154,7 @@ class Step3 extends React.Component {
   _loadAsyncData(query) {
     //let url = 'http://localhost:8088/bitem/cineca/proxy/ega_datasets?studies=' + query
     let url = 'https://denver.text-analytics.ch/bitem/cineca/proxy/ega_datasets?studies=' + query;
+    if (isDev()) url = 'http://localhost:8088/bitem/cineca/proxy/ega_datasets?studies=' + query;
 
 
     fetch(url)

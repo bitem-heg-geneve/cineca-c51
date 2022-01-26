@@ -3,27 +3,19 @@
 #
 
 # local call
-EGA_STUDIES.protocol=http
-EGA_STUDIES.server=localhost:9200
-EGA_STUDIES.baseurl=/ega_studies/
+EGA_STUDIES.baseurl=http://localhost:9200/ega_studies/
 
 # remote call
-EGA_STUDY_DATASETS.protocol=https
-EGA_STUDY_DATASETS.server=ega-archive.org
-EGA_STUDY_DATASETS.baseurl=/metadata/v2/datasets?queryBy=study&limit=0&queryId=
+EGA_STUDY_DATASETS.baseurl=https://ega-archive.org/metadata/v2/datasets?queryBy=study&limit=0&queryId=
 
-EXPANSION_VARIANTS.protocol=http
-EXPANSION_VARIANTS.server=goldorak.hesge.ch
-EXPANSION_VARIANTS.baseurl=/synvar/generate/litterature/fromMutation?variant=%variants&ref=%gene&level=protein&iso=true&format=beacon
+# remote call
+EXPANSION_VARIANTS.baseurl=http://goldorak.hesge.ch/synvar/generate/litterature/fromMutation?variant=%variants&ref=%gene&level=protein&iso=true&format=beacon
 
-EXPANSION_VERTICAL_MESH.protocol=http
-EXPANSION_VERTICAL_MESH.server=goldorak.hesge.ch:8890
-EXPANSION_VERTICAL_MESH.baseurl=/catalogue_explorer/VerticalExpansionMesh/?keywords=
+# remote call
+EXPANSION_VERTICAL_MESH.baseurl=http://goldorak.hesge.ch:8890/catalogue_explorer/VerticalExpansionMesh/?keywords=
 
-EXPANSION_DATADRIVEN.protocol=http
-EXPANSION_DATADRIVEN.server=goldorak.hesge.ch:8890
-EXPANSION_DATADRIVEN.baseurl=/catalogue_explorer/DatadrivenExpansion/?keywords=
+# remote call
+EXPANSION_DATADRIVEN.baseurl=http://goldorak.hesge.ch:8890/catalogue_explorer/DatadrivenExpansion/?keywords=
 
-COHORT_SEARCH.protocol=http
-COHORT_SEARCH.server=localhost:9200
-COHORT_SEARCH.baseurl=/cineca_synthetic_cohorts/
+# local call
+COHORT_SEARCH.baseurl=http://localhost:9200/cineca_synthetic_cohorts/

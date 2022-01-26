@@ -176,6 +176,29 @@ h3 {
   align-self: end;
 }
 
+.pam-ext-box {
+  display: table;
+  height: 100%;
+  width:100%;
+}
+
+.pam-int-box {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.pam-logos {
+  width: 75px;
+  height: auto;
+  padding: 10px;
+}
+
+.pam-example {
+  font-size:smaller;
+  color: grey;
+}
+
 .tooltip {
   position: relative;
 }

@@ -8,3 +8,8 @@ export function getUrlParam(name) {
   }
   return "";
 }
+
+export function isDev() {
+  let env = getUrlParam("env");
+  return env=="dev";
+}

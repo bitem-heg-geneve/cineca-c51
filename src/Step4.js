@@ -6,7 +6,7 @@ import YesNoUnknownChart from './YesNoUnknownChart';
 import React, { useState, useEffect } from 'react';
 import { Button, SearchInput } from 'evergreen-ui';
 import { useHistory } from 'react-router-dom';
-import { getUrlParam} from "./utils";
+import { getUrlParam, isDev } from "./utils";
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -24,6 +24,7 @@ function GlobalResult(props) {
     params += "variants=" + encodeURI(props.criteria.variants) + "&"
     params += "other=" + encodeURI(props.criteria.other)
     var url = 'https://denver.text-analytics.ch/bitem/cineca/proxy/cohorts/_search?' + params;
+    if (isDev()) url = 'http://localhost:8088/bitem/cineca/proxy/cohorts/_search?' + params;
     return fetch(url).then(resp => resp.json())
   }
 

@@ -10,20 +10,23 @@ import { BrowserRouter, Switch, Route, Link, NavLink , Redirect } from "react-ro
 
 function App(props) {
 
+  /*
+          <nav className="pam-nav">
+            <NavLink className="pam-link" activeClassName="pam-link-current" to="/home">Home</NavLink>&nbsp;
+            <span className="pam-nav-text">Steps&nbsp;</span>
+            <NavLink className="pam-link" activeClassName="pam-link-current" to="/step1">Step1</NavLink>&nbsp;
+            <NavLink className="pam-link" activeClassName="pam-link-current" to="/step2">Step2</NavLink>&nbsp;
+            <NavLink className="pam-link" activeClassName="pam-link-current" to="/step3">Step3</NavLink>&nbsp;
+            <NavLink className="pam-link" activeClassName="pam-link-current" to="/step4">Step4</NavLink>&nbsp;
+            <NavLink className="pam-link" activeClassName="pam-link-current" to="/step5">StepTest</NavLink>&nbsp;
+            <NavLink className="pam-link-disabled"  to="#">Step5</NavLink>&nbsp;
+          </nav>
+  */
+
   return (
     <BrowserRouter basename={process.env.REACT_APP_MYBASENAME}>
       <form className="pam-wrapper">
         <header className="pam-header">React SPA Demonstrator for Cineca Use Case 5.1</header>
-        <nav className="pam-nav">
-        <NavLink className="pam-link" activeClassName="pam-link-current" to="/home">Home</NavLink>&nbsp;
-          <span className="pam-nav-text">Steps&nbsp;</span>
-          <NavLink className="pam-link" activeClassName="pam-link-current" to="/step1">Step1</NavLink>&nbsp;
-          <NavLink className="pam-link" activeClassName="pam-link-current" to="/step2">Step2</NavLink>&nbsp;
-          <NavLink className="pam-link" activeClassName="pam-link-current" to="/step3">Step3</NavLink>&nbsp;
-          <NavLink className="pam-link" activeClassName="pam-link-current" to="/step4">Step4</NavLink>&nbsp;
-          <NavLink className="pam-link" activeClassName="pam-link-current" to="/step5">StepTest</NavLink>&nbsp;
-          <NavLink className="pam-link-disabled"  to="#">Step5</NavLink>&nbsp;
-        </nav>
         <main className="pam-main pam-flex-wrapper">
         <Switch>
           <Redirect exact strict from="/" push to="/home" />

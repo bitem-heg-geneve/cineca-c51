@@ -2,22 +2,23 @@ import './App.css';
 import React from 'react';
 import { useHistory } from "react-router-dom";
 import { Button } from 'evergreen-ui'
+import { getUrlParam, isDev } from "./utils";
 
 
 
-function getUrlParam(name) {
-  let params = window.location.search;
-  if (params.startsWith("?")) params=params.substr(1);
-  let nvlist = params.split("&");
-  for (var i=0; i<nvlist.length; i++) {
-    let nv = nvlist[i].split("=");
-    if (nv[0]==name && nv.length==2) return nv[1];
-  }
-  return "";
-}
+// function getUrlParam(name) {
+//   let params = window.location.search;
+//   if (params.startsWith("?")) params=params.substr(1);
+//   let nvlist = params.split("&");
+//   for (var i=0; i<nvlist.length; i++) {
+//     let nv = nvlist[i].split("=");
+//     if (nv[0]==name && nv.length==2) return nv[1];
+//   }
+//   return "";
+// }
 
 function Header(props) {
-  return (<h3>Step2 - Studies related to query <span className="pam-query-string">"{decodeURI(getUrlParam('query'))}"</span></h3> );
+  return (<h3>Studies related to query <span className="pam-query-string">"{decodeURI(getUrlParam('query'))}"</span></h3> );
 }
 
 function Debug(props) {
@@ -63,6 +64,8 @@ function BigHtmlDiv(props) {
 function GotoStep3Button(props) {
 
   const history = useHistory();
+  const env = getUrlParam("env");
+  const env_param = env=="" ? "" : "&env=" + env;
 
   function navigateTo(id) {
     var nodes = document.getElementsByName("checked_studies");
@@ -73,7 +76,7 @@ function GotoStep3Button(props) {
       if (cb.checked) study_list.push(cb.value);
     }
     var studies = study_list.join(",");
-    history.push('/Step3?query=' + studies);
+    history.push('/Step3?query=' + studies + env_param);
   }
 
   return (
@@ -128,6 +131,7 @@ class Step2 extends React.Component {
     // the python service behind https://denver.text-analytics.ch is CORS compatible
     //let url = 'http://localhost:8088/bitem/cineca/proxy/ega_studies/_search?size=20&q=' + query;
     let url = 'https://denver.text-analytics.ch/bitem/cineca/proxy/ega_studies/_search?size=20&q=' + query;
+    if (isDev()) url = 'http://localhost:8088/bitem/cineca/proxy/ega_studies/_search?size=20&q=' + query;
 
     fetch(url)
       .then(this.handleFetchError)
