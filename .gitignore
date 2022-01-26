@@ -27,3 +27,5 @@ yarn-error.log*
 /zip
 activate_python3.source
 package.json.before-material-ui
+cineca_httpserver.security.DEV
+cineca_httpserver.security.PROD
