@@ -1,6 +1,7 @@
 import './App.css';
 import React from 'react';
 import Step1 from './Step1';
+import Step1_QE from './Step1_QE';
 import Step2 from './Step2';
 import Step3 from './Step3';
 import Step4 from './Step4';
@@ -32,6 +33,7 @@ function App(props) {
           <Redirect exact strict from="/" push to="/home" />
           <Route exact path="/home"><Home /></Route> />
           <Route path="/step1" component={Step1} />
+		  <Route path="/step1_QE" component={Step1_QE} />
           <Route path="/step2" component={Step2} />
           <Route path="/step3" component={Step3} />
           <Route path="/step4" component={Step4} />
@@ -40,7 +42,7 @@ function App(props) {
         </Switch>
         </main>
         <footer className="pam-footer">
-          <a href="https://www.sib.swiss/patrick-ruch-group">BiTeM group</a> - September 2021 - <a href="https://github.com/bitem-heg-geneve/cineca-c51">Source</a> -
+          <a href="https://www.sib.swiss/patrick-ruch-group">BiTeM group</a> - February 2022 - <a href="https://github.com/bitem-heg-geneve/cineca-c51">Source</a> -
           node_env: {process.env.NODE_ENV} -
           basename: {process.env.REACT_APP_MYBASENAME}
         </footer>

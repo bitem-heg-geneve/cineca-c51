@@ -9,7 +9,7 @@ EGA_STUDIES.baseurl=http://localhost:9200/ega_studies/
 EGA_STUDY_DATASETS.baseurl=https://ega-archive.org/metadata/v2/datasets?queryBy=study&limit=0&queryId=
 
 # remote call
-EXPANSION_VARIANTS.baseurl=http://goldorak.hesge.ch/synvar/generate/litterature/fromMutation?variant=%variants&ref=%gene&level=protein&iso=true&format=beacon
+EXPANSION_VARIANTS.baseurl=http://goldorak.hesge.ch/synvar/generate/litterature/fromMutation?format=beacon&variant=
 
 # remote call
 EXPANSION_VERTICAL_MESH.baseurl=http://goldorak.hesge.ch:8890/catalogue_explorer/VerticalExpansionMesh/?keywords=

@@ -6,7 +6,7 @@ EGA_STUDIES.baseurl=https://denver.text-analytics.ch/local/ega_studies/
 
 EGA_STUDY_DATASETS.baseurl=https://ega-archive.org/metadata/v2/datasets?queryBy=study&limit=0&queryId=
 
-EXPANSION_VARIANTS.baseurl=http://goldorak.hesge.ch/synvar/generate/litterature/fromMutation?variant=%variants&ref=%gene&level=protein&iso=true&format=beacon
+EXPANSION_VARIANTS.baseurl=http://goldorak.hesge.ch/synvar/generate/litterature/fromMutation?format=beacon&variant=
 
 EXPANSION_DATADRIVEN.baseurl=http://goldorak.hesge.ch:8890/catalogue_explorer/DatadrivenExpansion/?keywords=
 
