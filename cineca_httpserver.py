@@ -122,7 +122,9 @@ class GP(BaseHTTPRequestHandler):
 
             elif self.path[0:83]=='/bitem/cineca/proxy/synvar/generate/litterature/fromMutation?format=beacon&variant=':
                 # '/synvar/generate/litterature/fromMutation'
-                url = self.get_service_baseurl('EXPANSION_VARIANTS')
+				keywords = self.path[83:]
+                print("keywords: ", keywords)
+                url = self.get_service_baseurl('EXPANSION_VARIANTS') + keywords
                 # replace %gene and %variants with query values
                 response = requests.get(url)
                 obj = response.json()
